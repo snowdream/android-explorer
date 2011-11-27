@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">HD檔案管理器</string>
+    <string name="emptydir">該資料夾為空</string>
+</resources>
