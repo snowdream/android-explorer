@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">HDExplorer</string>
-	<string name="emptydir">The directory is empty.</string>
-	<string name="button_text_yes">Yes</string>
-	<string name="button_text_no">No</string>
-	<string name="dialog_exit_app_title">Tips</string>
-	<string name="dialog_exit_app_message">Are you sure to exit HDExplorer?</string>	
-	<string name="menu_setting_text">Settings</string>
-	<string name="menu_about_text">About</string>
-	<string name="MY_AD_UNIT_ID">a14edf7f7b7136a</string>
-	<string name="TEST_DEVICE_ID">HT07GL900363</string>
+
+    <string name="app_name">HDExplorer</string>
+    <string name="emptydir">The directory is empty.</string>
+    <string name="button_text_yes">Yes</string>
+    <string name="button_text_no">No</string>
+    <string name="dialog_exit_app_title">Tips</string>
+    <string name="dialog_exit_app_message">Are you sure to exit HDExplorer?</string>
+    <string name="menu_newfolder_title">New Folder</string>
+    <string name="menu_settings_title">Settings</string>
+    <string name="menu_open_title">Open</string>
+    <string name="menu_openwith_title">Open With</string>
+    <string name="menu_copy_title">Copy</string>
+    <string name="menu_cut_title">Cut</string>
+    <string name="menu_paste_title">Paste</string>
+    <string name="menu_rename_title">Rename</string>
+    <string name="menu_delete_title">Delete</string>
+    <string name="menu_attribute_title">Attribute</string>
+    <string name="MY_AD_UNIT_ID">a14edf7f7b7136a</string>
+    <string name="TEST_DEVICE_ID">HT07GL900363</string>
+
 </resources>

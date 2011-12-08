@@ -18,7 +18,13 @@
 
 package com.hd.explorer;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -37,12 +43,17 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 /**
  * 
@@ -71,9 +82,7 @@ public class HDExplorerActivity extends ListActivity {
 	//BaseAdapter 
 	HDBaseAdapter madapter = null; 
 
-	//Menu
-	private static final int MENU_SETTINGS = Menu.FIRST;
-	private static final int MENU_ABOUT = Menu.FIRST+1;
+
 
 	//String
 	private String sdcard = "/mnt/sdcard";
@@ -83,6 +92,16 @@ public class HDExplorerActivity extends ListActivity {
 
 	//admob view
 	private AdView adView;
+
+	//cut and copy 
+	private String mCutOrCopyPath;
+	private int mAction = ACTION_NONE;
+
+	private static final int ACTION_NONE = 0;
+	private static final int ACTION_CUT = 1;
+	private static final int ACTION_COPY = 2;
+
+
 
 	/**
 	 * 
@@ -226,21 +245,125 @@ public class HDExplorerActivity extends ListActivity {
 		}
 	}
 
-	private void copy(File f){
+	private void openwith(File f){
+		Log.i(TAG,"open");
 
+		if(!f.exists())
+			return;
+
+		if(!f.canRead())
+			return;
+
+		if(f.isDirectory())
+			return;
+
+		if(f.isFile()){
+			Intent intent = new Intent();
+			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			intent.setAction(Intent.ACTION_VIEW);
+			String type = Constant.getMIMEType(f);
+			intent.setDataAndType(Uri.fromFile(f), type);
+			startActivity(intent);    
+
+		}
+	}
+
+	/** 复制文件 **/
+	public boolean copyFile(File src, File tar) throws Exception {
+		if (src.isFile()) {
+			InputStream is = new FileInputStream(src);
+			OutputStream op = new FileOutputStream(tar);
+			BufferedInputStream bis = new BufferedInputStream(is);
+			BufferedOutputStream bos = new BufferedOutputStream(op);
+			byte[] bt = new byte[1024 * 8];
+			int len = bis.read(bt);
+			while (len != -1) {
+				bos.write(bt, 0, len);
+				len = bis.read(bt);
+			}
+			bis.close();
+			bos.close();
+		}
+		if (src.isDirectory()) {
+			File[] f = src.listFiles();
+			tar.mkdir();
+			for (int i = 0; i < f.length; i++) {
+				copyFile(f[i].getAbsoluteFile(), new File(tar.getAbsoluteFile() + File.separator
+						+ f[i].getName()));
+			}
+		}
+		return true;
+	}
+
+	/** 移动文件 **/
+	public boolean moveFile(File src, File tar) throws Exception {
+		if (copyFile(src, tar)) {
+			deleteFile(src);
+			return true;
+		}
+		return false;
+	}
+
+	/** 删除文件 **/
+	public void deleteFile(File f) {
+
+		if (f.isDirectory()) {
+			File[] files = f.listFiles();
+			if (files != null && files.length > 0) {
+				for (int i = 0; i < files.length; ++i) {
+					deleteFile(files[i]);
+				}
+			}
+		}
+		f.delete();
+	}
+
+	private void copy(File f){
+		mAction = ACTION_COPY;
+		mCutOrCopyPath = f.getAbsolutePath();
 	}
 
 	private void cut(File f){
-
+		mAction = ACTION_CUT;
+		mCutOrCopyPath = f.getAbsolutePath();
 	}		
 
-	private void paste(File f){
+	private void paste(){
+		switch (mAction) {
+		case ACTION_COPY:
+			if((mCutOrCopyPath != null) && (mCurrentPath != null))
+			{
+				File src = new File(mCutOrCopyPath);
+				File dest = new File(mCurrentPath);
+				
+				try {
+					copyFile(src, dest);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
 
+			break;
+		case ACTION_CUT:
+			if((mCutOrCopyPath != null) && (mCurrentPath != null))
+			{
+				File src = new File(mCutOrCopyPath);
+				File dest = new File(mCurrentPath);
+				
+				try {
+					moveFile(src, dest);
+					deleteItem(src);
+					mCutOrCopyPath = null;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}			
+			break;
+		default:
+			break;
+		}
+		
 	}	
-
-	private void delete(File f){
-
-	}		
 
 	private void showdetails(File f){
 
@@ -422,6 +545,83 @@ public class HDExplorerActivity extends ListActivity {
 	}
 
 
+	/**
+	 * <b>onCreateContextMenu</b><br/>
+	 *  长按文件管理器中的文件，弹出上下文菜单
+	 *  
+	 * @param  menu 上下文菜单
+	 * @param  v  正在被创建的菜单视图
+	 * @param  menuInfo  上下文菜单信息
+	 * @return    无
+	 * @exception   无
+	 */	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.context, menu);
+		
+		AdapterView.AdapterContextMenuInfo info = null;
+
+		try {
+			info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+		} catch (ClassCastException e) {
+			Log.e(TAG, "bad menuInfo", e);
+			return;
+		}
+
+		File mselectedFile = madapter.getItem(info.position);
+		if(mselectedFile != null)
+		{
+			menu.setHeaderTitle(mselectedFile.getName());
+		}
+	}
+
+	/**
+	 * <b>onContextItemSelected</b><br/>
+	 *  点击上下文菜单选项时的事件处理
+	 *  
+	 * @param  item 被点击的菜单项
+	 * @return    true,表示事件已经处理；false，表示未处理。
+	 * @exception   无
+	 */	
+	public boolean onContextItemSelected(MenuItem item) {
+
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		File f = madapter.getItem(info.position);
+		if(f == null)
+			return false;
+		switch (item.getItemId()) {
+		case R.id.open:
+			open(f);
+			return true;
+		case R.id.openwith:
+			openwith(f);
+			return true;
+		case R.id.copy:
+			copy(f);
+			return true;
+		case R.id.cut:
+			cut(f);
+			return true;
+		case R.id.paste:
+			paste();
+			return true;
+		case R.id.rename:
+			//rename(f);
+			return true;
+		case R.id.delete:
+			deleteFile(f);
+			deleteItem(f);
+			return true;
+		case R.id.attribute:
+			//attribute(f);
+			return true;
+		default:
+			return super.onContextItemSelected(item);
+		}
+	}
+
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		super.onListItemClick(l, v, position, id);
@@ -496,6 +696,8 @@ public class HDExplorerActivity extends ListActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		Log.i(TAG,"onCreateOptionsMenu");
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.options, menu);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -509,11 +711,7 @@ public class HDExplorerActivity extends ListActivity {
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		Log.i(TAG,"onPrepareOptionsMenu");
-		menu.clear();
-		menu.add(0, MENU_SETTINGS, 1, R.string.menu_setting_text).setIcon(android.R.drawable.ic_menu_preferences);
-		menu.add(0, MENU_ABOUT, 2, R.string.menu_about_text).setIcon(android.R.drawable.ic_menu_info_details);
-		return super.onPrepareOptionsMenu(menu);
-
+		return true;
 	}
 
 	/**

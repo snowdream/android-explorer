@@ -6,8 +6,16 @@
 	<string name="button_text_no">取消</string>
 	<string name="dialog_exit_app_title">提示</string>
 	<string name="dialog_exit_app_message">你確定要退出 HD檔案管理器？ </string>
-	<string name="menu_setting_text">設置</string>
-	<string name="menu_about_text">關於</string>
+	<string name="menu_newfolder_title">新建資料夾</string>
+	<string name="menu_settings_title">設置</string>
+	<string name="menu_open_title">打開</string>
+	<string name="menu_openwith_title">打開方式</string>
+	<string name="menu_copy_title">複製</string>
+	<string name="menu_cut_title">剪切</string>
+	<string name="menu_paste_title">黏貼</string>
+	<string name="menu_rename_title">重命名</string>
+	<string name="menu_delete_title">刪除</string>
+	<string name="menu_attribute_title">屬性</string>
 	<string name="MY_AD_UNIT_ID">a14edf7f7b7136a</string>
 	<string name="TEST_DEVICE_ID">HT07GL900363</string>
 </resources>

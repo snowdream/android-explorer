@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item android:id="@+id/open" android:title="@string/menu_open_title" />
+	<item android:id="@+id/openwith" android:title="@string/menu_openwith_title" />
+	<item android:id="@+id/copy" android:title="@string/menu_copy_title" />
+	<item android:id="@+id/cut" android:title="@string/menu_cut_title" />
+	<item android:id="@+id/paste" android:title="@string/menu_paste_title" />
+	<item android:id="@+id/rename" android:title="@string/menu_rename_title" />
+	<item android:id="@+id/delete" android:title="@string/menu_delete_title" />
+	<item android:id="@+id/attribute" android:title="@string/menu_attribute_title" />
+</menu>
