@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<string name="app_name">HD檔案管理器</string>
-    <string name="emptydir">該資料夾為空</string>
+	<string name="emptydir">該資料夾為空</string>
+	<string name="button_text_yes">確定</string>
+	<string name="button_text_no">取消</string>
+	<string name="dialog_exit_app_title">提示</string>
+	<string name="dialog_exit_app_message">你確定要退出 HD檔案管理器？ </string>
+	<string name="menu_setting_text">設置</string>
+	<string name="menu_about_text">關於</string>
+	<string name="MY_AD_UNIT_ID">a14edf7f7b7136a</string>
+	<string name="TEST_DEVICE_ID">HT07GL900363</string>
 </resources>
