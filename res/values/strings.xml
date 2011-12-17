@@ -7,6 +7,9 @@
     <string name="button_text_no">No</string>
     <string name="dialog_exit_app_title">Tips</string>
     <string name="dialog_exit_app_message">Are you sure to exit HDExplorer?</string>
+    <string name="dialog_create_folder_title">Create a folder</string>
+    <string name="dialog_file_rename_title">Rename</string>
+    <string name="dialog_file_details_title">Attribute</string>
     <string name="menu_newfolder_title">New Folder</string>
     <string name="menu_settings_title">Settings</string>
     <string name="menu_open_title">Open</string>
@@ -17,6 +20,27 @@
     <string name="menu_rename_title">Rename</string>
     <string name="menu_delete_title">Delete</string>
     <string name="menu_attribute_title">Attribute</string>
+    <string name="dialog_attribute_file_name">Name</string>
+    <string name="dialog_attribute_file_size">Size</string>
+    <string name="dialog_attribute_file_lastmodified">Last modified</string>
+    <string name="preference_category_settings_title">General Settings</string>
+    <string name="preference_showhidden_title">Show Hidden Files</string>
+    <string name="preference_showhidden_key">showhidden</string>
+    <string name="preference_showhidden_summary">Whether to show the File which name start with "."</string>
+    <string name="preference_showhidden_default_value">false</string>
+    <string name="preference_category_about_title">About</string>
+    <string name="preference_help_title">Help</string>
+    <string name="preference_help_summary">Find answers to your HDExplorer questions here</string>
+    <string name="preference_help_intent_data">http://code.google.com/p/hdexplorer/w/list</string>
+    <string name="preference_feedback_title">Feedback</string>
+    <string name="preference_feedback_summary">Help us make the HDExplorer better</string>
+    <string name="preference_feedback_intent_data">http://code.google.com/p/hdexplorer/issues/list</string>
+    <string name="preference_thanks_title">Thanks</string>
+    <string name="preference_thanks_summary">Thanks to the people for their help and support</string>
+    <string name="preference_licenses_title">Open source licenses</string>
+    <string name="preference_licenses_summary">License details for open source software</string>
+    <string name="preference_version_title">Application version</string>
+    <string name="preference_version_summary">0.1.0</string>
     <string name="MY_AD_UNIT_ID">a14edf7f7b7136a</string>
     <string name="TEST_DEVICE_ID">HT07GL900363</string>
 

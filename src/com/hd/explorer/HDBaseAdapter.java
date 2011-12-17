@@ -127,7 +127,8 @@ public class HDBaseAdapter extends BaseAdapter {
 				holder.mfileIcon.setImageResource(icon);
 			}
 			holder.mfileName.setText(f.getName());
-			holder.mfileSize.setText(this.getFileSize(f.length()));
+			if(f.isFile())
+				holder.mfileSize.setText(this.getFileSize(f.length()));
 			holder.mfileTime.setText(this.getFileTime(f.lastModified()));
 		}
 

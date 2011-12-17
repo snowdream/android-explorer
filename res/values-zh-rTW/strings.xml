@@ -6,6 +6,9 @@
 	<string name="button_text_no">取消</string>
 	<string name="dialog_exit_app_title">提示</string>
 	<string name="dialog_exit_app_message">你確定要退出 HD檔案管理器？ </string>
+	<string name="dialog_create_folder_title">新建資料夾</string>
+	<string name="dialog_file_rename_title">重命名</string>
+	<string name="dialog_file_details_title">屬性</string>	
 	<string name="menu_newfolder_title">新建資料夾</string>
 	<string name="menu_settings_title">設置</string>
 	<string name="menu_open_title">打開</string>
@@ -16,6 +19,28 @@
 	<string name="menu_rename_title">重命名</string>
 	<string name="menu_delete_title">刪除</string>
 	<string name="menu_attribute_title">屬性</string>
+	<string name="dialog_attribute_file_name">名稱</string>
+	<string name="dialog_attribute_file_size">大小</string>
+	<string name="dialog_attribute_file_lastmodified">最後修改時間</string>
+	<string name="preference_category_settings_title">常規設置</string>
+	<string name="preference_showhidden_title">顯示隱藏文件</string>
+	<string name="preference_showhidden_key">showhidden</string>
+	<string name="preference_showhidden_summary">是否顯示文件名以"."開頭的文件</string>
+	<string name="preference_showhidden_default_value">false</string>
+	<string name="preference_category_about_title">關於</string>
+	<string name="preference_help_title">幫助</string>
+	<string name="preference_help_summary">在這裡查找 HD文件管理器 相關問題的答案</string>
+	<string name="preference_help_intent_data">http://code.google.com/p/hdexplorer/w/list</string>
+	<string name="preference_feedback_title">反饋</string>
+	<string name="preference_feedback_summary">幫助我們改進 HD文件管理器 的服務</string>
+	<string name="preference_feedback_intent_data">http://code.google.com/p/hdexplorer/issues/list
+	</string>
+	<string name="preference_thanks_title">致謝</string>
+	<string name="preference_thanks_summary">感謝各位對我的支持和幫助</string>
+	<string name="preference_licenses_title">開放源代碼許可</string>
+	<string name="preference_licenses_summary">開放源代碼軟件的許可詳情</string>
+	<string name="preference_version_title">應用程序版本</string>
+	<string name="preference_version_summary">0.1.0</string>
 	<string name="MY_AD_UNIT_ID">a14edf7f7b7136a</string>
 	<string name="TEST_DEVICE_ID">HT07GL900363</string>
 </resources>

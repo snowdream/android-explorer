@@ -25,8 +25,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import com.google.ads.AdRequest;
@@ -39,12 +42,17 @@ import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.DialogInterface.OnClickListener;
 import android.content.res.Configuration;
+import android.content.res.Resources.NotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -52,7 +60,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 
 /**
@@ -69,12 +79,15 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
  */
 public class HDExplorerActivity extends ListActivity {
 
-	private static final String TAG = "HDExplorerActivity";
+	private static final String TAG = "HDExplorer";
 	//Boolean Flags
 	private boolean misFullScreen = true;
 
 	//Dialogs ID
 	private final int DIALOG_EXIT_APP = 0;
+	private final int FOLDER_CREATE =1;
+	private final int FILE_RENAME =2;
+	private final int FILE_DETAILS =3;
 
 	//the data source
 	List<File> mfiles = null; 
@@ -88,19 +101,24 @@ public class HDExplorerActivity extends ListActivity {
 	private String sdcard = "/mnt/sdcard";
 
 	//String
-	private String mCurrentPath;
+	private File mCurrentPathFile = null;
+	private File mRenameFile = null;
+	private File mDetailFile = null; 
 
 	//admob view
 	private AdView adView;
 
 	//cut and copy 
-	private String mCutOrCopyPath;
+	private File mCutOrCopyFile = null;
 	private int mAction = ACTION_NONE;
+
+	private boolean misShowHiddenFiles = false;
 
 	private static final int ACTION_NONE = 0;
 	private static final int ACTION_CUT = 1;
 	private static final int ACTION_COPY = 2;
 
+	private static final int REQ_SYSTEM_SETTINGS = 0;    
 
 
 	/**
@@ -151,6 +169,8 @@ public class HDExplorerActivity extends ListActivity {
 		setListAdapter(madapter);
 
 		File sdf = new File(sdcard);
+
+		loadSettings();
 
 		open(sdf);
 	}
@@ -231,8 +251,8 @@ public class HDExplorerActivity extends ListActivity {
 		}else if(f.isDirectory()){
 			deleteAllItems();
 
-			mCurrentPath = f.getPath();
-			setTitle(mCurrentPath);
+			mCurrentPathFile = f;
+			setTitle(mCurrentPathFile.getAbsolutePath());
 
 			File[] files = f.listFiles();
 
@@ -240,6 +260,9 @@ public class HDExplorerActivity extends ListActivity {
 			Arrays.sort(files, new FileComparator());
 
 			for(File file:files){
+				if(!misShowHiddenFiles && file.isHidden()){
+					continue;
+				}
 				addItem(file);
 			}
 		}
@@ -320,54 +343,147 @@ public class HDExplorerActivity extends ListActivity {
 
 	private void copy(File f){
 		mAction = ACTION_COPY;
-		mCutOrCopyPath = f.getAbsolutePath();
+		mCutOrCopyFile = f;
 	}
 
 	private void cut(File f){
 		mAction = ACTION_CUT;
-		mCutOrCopyPath = f.getAbsolutePath();
+		mCutOrCopyFile = f;
 	}		
 
 	private void paste(){
 		switch (mAction) {
 		case ACTION_COPY:
-			if((mCutOrCopyPath != null) && (mCurrentPath != null))
+			if((mCutOrCopyFile != null) && (mCurrentPathFile != null))
 			{
-				File src = new File(mCutOrCopyPath);
-				File dest = new File(mCurrentPath);
-				
-				try {
-					copyFile(src, dest);
-				} catch (Exception e) {
-					e.printStackTrace();
+				String destname = combineFilename(mCutOrCopyFile, mCurrentPathFile);
+				File src = mCutOrCopyFile;
+				File dest = new File(destname);
+				boolean misFileExist = checkFileExist(dest);
+				if(misFileExist){
+					//该文件已经存在
+				}else{
+					try {
+						copyFile(src, dest);
+						addItem(dest);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 
 			break;
 		case ACTION_CUT:
-			if((mCutOrCopyPath != null) && (mCurrentPath != null))
+			if((mCutOrCopyFile != null) && (mCurrentPathFile != null))
 			{
-				File src = new File(mCutOrCopyPath);
-				File dest = new File(mCurrentPath);
-				
-				try {
-					moveFile(src, dest);
-					deleteItem(src);
-					mCutOrCopyPath = null;
-				} catch (Exception e) {
-					e.printStackTrace();
+				String destname = combineFilename(mCutOrCopyFile, mCurrentPathFile);
+				File src = mCutOrCopyFile;
+				File dest = new File(destname);
+				boolean misFileExist = checkFileExist(dest);
+				if(misFileExist){
+					//该文件已经存在
+				}else{
+					try {
+						moveFile(src, dest);
+						addItem(dest);
+						deleteItem(src);
+						mCutOrCopyFile = null;
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}			
 			break;
 		default:
 			break;
 		}
-		
+
 	}	
+	
+	private void rename(File f){
+		mRenameFile = f;
+		showDialog(FILE_RENAME);
+	}
 
 	private void showdetails(File f){
-
+		mDetailFile = f;
+		showDialog(FILE_DETAILS);
 	}
+
+	private void createFolder(File newFile){
+		if (newFile.exists()) {
+			//Toast.makeText(activity, R.string.file_exists, Toast.LENGTH_SHORT).show();
+		} else {
+			try {
+				if (newFile.mkdir()) {
+					//	hander.sendEmptyMessage(0); // 成功
+					addItem(newFile);
+				} else {
+					//	Toast.makeText(activity, R.string.file_create_fail, Toast.LENGTH_SHORT)
+					//			.show();
+				}
+			} catch (Exception ex) {
+				//Toast.makeText(activity, ex.getLocalizedMessage(), Toast.LENGTH_SHORT)
+				//			.show();
+			}
+		}
+	}
+
+	public boolean checkFileExist(File f){
+		boolean ret = false;
+
+		File[] files = mCurrentPathFile.listFiles();
+
+		for(File file:files){
+			if((f.getName()).equals(file.getName())){
+				ret = true;
+				break;
+			}
+		}
+
+		return ret;
+	}
+
+	public String combineFilename(File src,File dest){
+		String destname = null;
+
+		if (src == null || dest == null || !dest.isDirectory()) {
+			return destname;
+		}
+
+		destname = dest.getAbsolutePath()+"/"+src.getName();
+
+		return destname;
+	}
+
+	/**
+	 * <b>loadSettings</b><br/>
+	 *  读取Preference值，并加载设置参数。<br/>
+	 *  
+	 * @param      无
+	 * @return     设置成功，返回true，否则返回false。
+	 */	
+	public boolean loadSettings(){
+		Log.i(TAG, "loadSettings");
+		boolean ret = true;
+
+		try {
+			String key_showhidden = getResources().getString(R.string.preference_showhidden_key);  
+			boolean default_value_showhidden = Boolean.parseBoolean(getResources().getString(R.string.preference_showhidden_default_value));
+
+			SharedPreferences settings =  PreferenceManager.getDefaultSharedPreferences(this);  
+			misShowHiddenFiles = settings.getBoolean(key_showhidden, default_value_showhidden);
+		} catch (NotFoundException e) {
+			ret = false;
+			e.printStackTrace();
+		}catch (ClassCastException e) {
+			ret = false;
+			e.printStackTrace();
+		}
+
+		return ret;
+	}
+
 
 	/**
 	 * 
@@ -383,7 +499,11 @@ public class HDExplorerActivity extends ListActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		Log.i(TAG,"onActivityResult");
 		super.onActivityResult(requestCode, resultCode, data);
-
+		if(requestCode == REQ_SYSTEM_SETTINGS)  
+		{  
+			loadSettings();
+			open(mCurrentPathFile);
+		}
 	}
 
 	/**
@@ -527,12 +647,12 @@ public class HDExplorerActivity extends ListActivity {
 		Log.i(TAG,"onKeyDown");
 		switch (keyCode) {
 		case KeyEvent.KEYCODE_BACK:
-			if(mCurrentPath.equals(sdcard))
+			if((mCurrentPathFile.getAbsolutePath()).equals(sdcard))
 			{
 				showDialog(DIALOG_EXIT_APP);
 			}
 			else{
-				File f = new File(mCurrentPath);
+				File f = mCurrentPathFile;
 				open(f.getParentFile());
 			}
 			return true;
@@ -560,7 +680,7 @@ public class HDExplorerActivity extends ListActivity {
 		super.onCreateContextMenu(menu, v, menuInfo);
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.context, menu);
-		
+
 		AdapterView.AdapterContextMenuInfo info = null;
 
 		try {
@@ -608,14 +728,14 @@ public class HDExplorerActivity extends ListActivity {
 			paste();
 			return true;
 		case R.id.rename:
-			//rename(f);
+			rename(f);
 			return true;
 		case R.id.delete:
 			deleteFile(f);
 			deleteItem(f);
 			return true;
 		case R.id.attribute:
-			//attribute(f);
+			showdetails(f);
 			return true;
 		default:
 			return super.onContextItemSelected(item);
@@ -663,13 +783,144 @@ public class HDExplorerActivity extends ListActivity {
 				}
 			});
 			return mexitDialog.create();
+		case FOLDER_CREATE:
+			AlertDialog.Builder mcreatedialog = new AlertDialog.Builder(this);
+			View layout = LayoutInflater.from(this).inflate(R.layout.file_create, null);
+			final EditText text = (EditText) layout.findViewById(R.id.file_name);
+			mcreatedialog.setTitle(R.string.dialog_create_folder_title);
+			mcreatedialog.setView(layout);
+			mcreatedialog.setPositiveButton(R.string.button_text_yes, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					String newName = text.getText().toString().trim();
+					if (newName.length() == 0) {
+						//Toast.makeText(this, R.string.file_namecannotempty, Toast.LENGTH_SHORT)
+						//		.show();
+						return;
+					}
+					String fullFileName = mCurrentPathFile+"/"+newName;
+					File newFile = new File(fullFileName);
+					createFolder(newFile);
+				}
+			});
+			mcreatedialog.setNegativeButton(R.string.button_text_no, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.cancel();
+				}
+			});
+			return mcreatedialog.create();	
+		case FILE_RENAME:
+			if (mRenameFile == null) {
+				return null;
+			}
+			
+			AlertDialog.Builder mrenamedialog = new AlertDialog.Builder(this);
+			View renamelayout = LayoutInflater.from(this).inflate(R.layout.file_rename, null);
+			final EditText renametext = (EditText) renamelayout.findViewById(R.id.file_name);
+			renametext.setText(mRenameFile.getName());
+			mrenamedialog.setTitle(R.string.dialog_file_rename_title);
+			mrenamedialog.setView(renamelayout);
+			mrenamedialog.setPositiveButton(R.string.button_text_yes, new OnClickListener() {
+				public void onClick(DialogInterface dialoginterface, int i) {
+					String path = mRenameFile.getParentFile().getPath();
+					String newName = renametext.getText().toString().trim();
+					if (newName.equalsIgnoreCase(mRenameFile.getName())) {
+						return;
+					}
+					if (newName.length() == 0) {
+						//Toast.makeText(activity, R.string.file_namecannotempty, Toast.LENGTH_SHORT)
+						//		.show();
+						return;
+					}
+					String fullFileName = path+"/"+ newName;
+
+					File newFile = new File(fullFileName);
+					if (newFile.exists()) {
+						//Toast.makeText(activity, R.string.file_exists, Toast.LENGTH_SHORT).show();
+					} else {
+						try {
+							if (mRenameFile.renameTo(newFile)) {
+								//hander.sendEmptyMessage(0); // 成功
+								deleteItem(mRenameFile);
+								addItem(newFile);
+								mRenameFile = null;
+							} else {
+								//Toast.makeText(activity, R.string.file_rename_fail, Toast.LENGTH_SHORT)
+								//		.show();
+							}
+						} catch (Exception ex) {
+							//Toast.makeText(activity, ex.getLocalizedMessage(), Toast.LENGTH_SHORT)
+							//		.show();
+						}
+					}
+				}
+			}).setNegativeButton(R.string.button_text_no, new DialogInterface.OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					dialog.cancel();
+				}
+			});
+			return mrenamedialog.create();
+		case FILE_DETAILS:
+			if (mDetailFile == null) {
+				return null;
+			}		
+			AlertDialog.Builder mdetaildialog = new AlertDialog.Builder(this);
+			View detaillayout = LayoutInflater.from(this).inflate(R.layout.file_info, null);
+
+			((TextView) detaillayout.findViewById(R.id.file_name)).setText(mDetailFile.getName());
+			((TextView) detaillayout.findViewById(R.id.file_lastmodified)).setText(getFileTime(mDetailFile.lastModified()));
+			((TextView) detaillayout.findViewById(R.id.file_size))
+					.setText(getFileSize(mDetailFile.length()));
+			mdetaildialog.setTitle(R.string.dialog_file_details_title);
+			mdetaildialog.setView(detaillayout);
+			mdetaildialog.setPositiveButton(R.string.button_text_yes, new OnClickListener() {
+				public void onClick(DialogInterface dialoginterface, int i) {
+					mDetailFile = null;
+					dialoginterface.cancel();
+				}
+			});
+			return mdetaildialog.create();
 		default:
 			break;
 		}
 		return super.onCreateDialog(id);
 
 	}
+	
+	public String getFileTime(long filetime) {
+		SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss"); 
+		String ftime =  formatter.format(new Date(filetime)); 
+		return ftime;
+	}
 
+	public String getFileSize(long filesize) {
+		DecimalFormat df = new DecimalFormat("#.00");
+		StringBuffer mstrbuf = new StringBuffer();
+
+		if (filesize < 1024) {
+			mstrbuf.append(filesize);
+			mstrbuf.append(" B");
+		} else if (filesize < 1048576) {
+			mstrbuf.append(df.format((double)filesize / 1024));
+			mstrbuf.append(" K");			
+		} else if (filesize < 1073741824) {
+			mstrbuf.append(df.format((double)filesize / 1048576));
+			mstrbuf.append(" M");			
+		} else {
+			mstrbuf.append(df.format((double)filesize / 1073741824));
+			mstrbuf.append(" G");
+		}
+
+		df = null;
+
+		return mstrbuf.toString();
+	}
+	
 	/**
 	 * 
 	 * onPrepareDialog: Update the Dialogs if needed.
@@ -696,9 +947,10 @@ public class HDExplorerActivity extends ListActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		Log.i(TAG,"onCreateOptionsMenu");
+		super.onCreateOptionsMenu(menu);
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.options, menu);
-		return super.onCreateOptionsMenu(menu);
+		return true;
 	}
 
 	/**
@@ -725,9 +977,17 @@ public class HDExplorerActivity extends ListActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Log.i(TAG,"onOptionsItemSelected");
+		switch(item.getItemId()) {
+		case R.id.new_folder:
+			showDialog(FOLDER_CREATE);
+			return true;
+		case R.id.settings:
+			startActivityForResult(new Intent(HDExplorerActivity.this, HDSettingsActivity.class), REQ_SYSTEM_SETTINGS);  
+			return true;
+		default:
+			break;
 
-		return super.onOptionsItemSelected(item);
-
+		}	
+		return false;
 	}
-
 }

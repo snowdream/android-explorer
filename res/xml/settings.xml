@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	android:title="@string/preference_category_settings_title">
+	<PreferenceCategory android:title="@string/preference_category_settings_title">
+		<CheckBoxPreference android:key="@string/preference_showhidden_key"
+			android:title="@string/preference_showhidden_title" android:summary="@string/preference_showhidden_summary"
+			android:defaultValue="@string/preference_showhidden_default_value">
+		</CheckBoxPreference>
+	</PreferenceCategory>
+	<PreferenceCategory android:title="@string/preference_category_about_title">
+		<PreferenceScreen android:title="@string/preference_help_title"
+			android:summary="@string/preference_help_summary">
+			<intent android:action="android.intent.action.VIEW"
+				android:data="@string/preference_help_intent_data" />
+		</PreferenceScreen>
+		<PreferenceScreen android:title="@string/preference_feedback_title"
+			android:summary="@string/preference_feedback_summary">
+			<intent android:action="android.intent.action.VIEW"
+				android:data="@string/preference_feedback_intent_data" />
+		</PreferenceScreen>
+		<PreferenceScreen android:title="@string/preference_thanks_title"
+			android:summary="@string/preference_thanks_summary">
+		</PreferenceScreen>
+		<PreferenceScreen android:title="@string/preference_licenses_title"
+			android:summary="@string/preference_licenses_summary">
+		</PreferenceScreen>
+		<PreferenceScreen android:title="@string/preference_version_title"
+			android:summary="@string/preference_version_summary">
+		</PreferenceScreen>
+	</PreferenceCategory>
+</PreferenceScreen>
