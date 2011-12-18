@@ -24,8 +24,7 @@
 		<PreferenceScreen android:title="@string/preference_licenses_title"
 			android:summary="@string/preference_licenses_summary">
 		</PreferenceScreen>
-		<PreferenceScreen android:title="@string/preference_version_title"
-			android:summary="@string/preference_version_summary">
-		</PreferenceScreen>
+		<Preference android:title="@string/preference_version_title"
+			android:summary="@string/preference_version_summary" android:enabled="false" />
 	</PreferenceCategory>
 </PreferenceScreen>
