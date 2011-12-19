@@ -399,7 +399,7 @@ public class HDExplorerActivity extends ListActivity {
 		}
 
 	}	
-	
+
 	private void rename(File f){
 		mRenameFile = f;
 		showDialog(FILE_RENAME);
@@ -816,7 +816,7 @@ public class HDExplorerActivity extends ListActivity {
 			if (mRenameFile == null) {
 				return null;
 			}
-			
+
 			AlertDialog.Builder mrenamedialog = new AlertDialog.Builder(this);
 			View renamelayout = LayoutInflater.from(this).inflate(R.layout.file_rename, null);
 			final EditText renametext = (EditText) renamelayout.findViewById(R.id.file_name);
@@ -875,7 +875,7 @@ public class HDExplorerActivity extends ListActivity {
 			((TextView) detaillayout.findViewById(R.id.file_name)).setText(mDetailFile.getName());
 			((TextView) detaillayout.findViewById(R.id.file_lastmodified)).setText(getFileTime(mDetailFile.lastModified()));
 			((TextView) detaillayout.findViewById(R.id.file_size))
-					.setText(getFileSize(mDetailFile.length()));
+			.setText(getFileSize(mDetailFile.length()));
 			mdetaildialog.setTitle(R.string.dialog_file_details_title);
 			mdetaildialog.setView(detaillayout);
 			mdetaildialog.setPositiveButton(R.string.button_text_yes, new OnClickListener() {
@@ -891,7 +891,7 @@ public class HDExplorerActivity extends ListActivity {
 		return super.onCreateDialog(id);
 
 	}
-	
+
 	public String getFileTime(long filetime) {
 		SimpleDateFormat formatter = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss"); 
 		String ftime =  formatter.format(new Date(filetime)); 
@@ -920,7 +920,7 @@ public class HDExplorerActivity extends ListActivity {
 
 		return mstrbuf.toString();
 	}
-	
+
 	/**
 	 * 
 	 * onPrepareDialog: Update the Dialogs if needed.
@@ -932,8 +932,29 @@ public class HDExplorerActivity extends ListActivity {
 	@Override
 	protected void onPrepareDialog(int id, Dialog dialog) {
 		Log.i(TAG,"onPrepareDialog");
-		super.onPrepareDialog(id, dialog);
+		switch (id) {
+		case DIALOG_EXIT_APP:
+			break;
+		case FOLDER_CREATE:
+			break;
+		case FILE_RENAME:
+			break;
+		case FILE_DETAILS:
+			if (mDetailFile == null) {
+				return ;
+			}		
+			AlertDialog mdetaildialog = (AlertDialog)dialog;
 
+			((TextView) mdetaildialog.findViewById(R.id.file_name)).setText(mDetailFile.getName());
+			((TextView) mdetaildialog.findViewById(R.id.file_lastmodified)).setText(getFileTime(mDetailFile.lastModified()));
+			((TextView) mdetaildialog.findViewById(R.id.file_size))
+			.setText(getFileSize(mDetailFile.length()));
+
+			break;
+		default:
+			break;
+		}
+		super.onPrepareDialog(id, dialog);
 	}
 
 
