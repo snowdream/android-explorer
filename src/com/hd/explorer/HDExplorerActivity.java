@@ -61,6 +61,7 @@ import android.view.WindowManager;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
@@ -91,11 +92,11 @@ public class HDExplorerActivity extends ListActivity {
 
 	//the data source
 	List<File> mfiles = null; 
+	List<File> mbackwardfiles = null; 
+	List<File> mforwardfiles = null; 
 
 	//BaseAdapter 
 	HDBaseAdapter madapter = null; 
-
-
 
 	//String
 	private String sdcard = "/mnt/sdcard";
@@ -120,7 +121,15 @@ public class HDExplorerActivity extends ListActivity {
 
 	private static final int REQ_SYSTEM_SETTINGS = 0;    
 
-
+	//ImageButton
+	ImageButton mpaste = null;
+	ImageButton mhome = null;
+	ImageButton mupward = null;
+	ImageButton mbackward = null;
+	ImageButton mforward = null;
+	ImageButton mrefresh = null;
+	
+	
 	/**
 	 * 
 	 * onCreate: Called when the activity is first created.
@@ -147,9 +156,73 @@ public class HDExplorerActivity extends ListActivity {
 		adView = (AdView)this.findViewById(R.id.adView);
 		adView.loadAd(new AdRequest());
 
+		initToolbar();
 		init();
 	}
 
+	/**
+	 * 
+	 * init: Init the Toolbar 
+	 *
+	 * @param   
+	 * @return     
+	 * @throws 
+	 */
+	private void initToolbar() {
+		mpaste = (ImageButton) findViewById(R.id.paste);
+		mpaste.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				paste();
+				mpaste.setVisibility(View.GONE);
+			}
+		});
+	
+	
+		mhome = (ImageButton) findViewById(R.id.home);
+		mhome.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				File sdf = new File(sdcard);
+				open(sdf,false);
+				mbackwardfiles.clear();
+				mforwardfiles.clear();
+			}
+		});
+		
+		mupward = (ImageButton) findViewById(R.id.upward);
+		mupward.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				upward();
+			}
+		});	
+		
+		mbackward = (ImageButton) findViewById(R.id.backward);
+		mbackward.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				backward();
+			}
+		});		
+		
+		mforward = (ImageButton) findViewById(R.id.forward);
+		mforward.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				forward();
+			}
+		});			
+		
+		mrefresh = (ImageButton) findViewById(R.id.refresh);
+		mrefresh.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			 refresh();
+			}
+		});				
+	}
+		
 	/**
 	 * 
 	 * init: Init the data 
@@ -163,7 +236,11 @@ public class HDExplorerActivity extends ListActivity {
 		// adView = new AdView(this, AdSize.BANNER, getString(R.string.MY_AD_UNIT_ID));
 
 		mfiles = new ArrayList<File>();
-
+		
+		mbackwardfiles = new ArrayList<File>();
+		
+		mforwardfiles = new ArrayList<File>();
+		
 		madapter = new HDBaseAdapter(this,mfiles);	
 
 		setListAdapter(madapter);
@@ -172,7 +249,7 @@ public class HDExplorerActivity extends ListActivity {
 
 		loadSettings();
 
-		open(sdf);
+		open(sdf,false);
 	}
 
 	/**
@@ -231,9 +308,12 @@ public class HDExplorerActivity extends ListActivity {
 	 * @return      
 	 * @throws 
 	 */		
-	private void open(File f){
+	private void open(File f ,boolean misAddToBackWardFiles){
 		Log.i(TAG,"open");
 
+		if(f == null)
+			return;
+		
 		if(!f.exists())
 			return;
 
@@ -253,7 +333,11 @@ public class HDExplorerActivity extends ListActivity {
 
 			mCurrentPathFile = f;
 			setTitle(mCurrentPathFile.getAbsolutePath());
-
+			
+			if (misAddToBackWardFiles) {
+				mbackwardfiles.add(mCurrentPathFile.getParentFile());
+			}
+			
 			File[] files = f.listFiles();
 
 			// 排序
@@ -344,11 +428,19 @@ public class HDExplorerActivity extends ListActivity {
 	private void copy(File f){
 		mAction = ACTION_COPY;
 		mCutOrCopyFile = f;
+		
+		if (mCutOrCopyFile != null) {
+			mpaste.setVisibility(View.VISIBLE);
+		}
 	}
 
 	private void cut(File f){
 		mAction = ACTION_CUT;
 		mCutOrCopyFile = f;
+		
+		if (mCutOrCopyFile != null) {
+			mpaste.setVisibility(View.VISIBLE);
+		}
 	}		
 
 	private void paste(){
@@ -410,6 +502,48 @@ public class HDExplorerActivity extends ListActivity {
 		showDialog(FILE_DETAILS);
 	}
 
+	public void upward(){
+		if((mCurrentPathFile.getAbsolutePath()).equals(sdcard))
+		{
+			showDialog(DIALOG_EXIT_APP);
+		}
+		else{
+			String rootString = "/";
+			File f = mCurrentPathFile;
+			if (!mCurrentPathFile.getAbsolutePath().equals(rootString)) {
+				open(f.getParentFile(),true);
+			}
+		}
+	}
+	
+	public void backward(){
+		
+		if (mbackwardfiles.size() > 0) {
+			File backpathFile = mbackwardfiles.get(mbackwardfiles.size()-1);
+			open(backpathFile, false);
+			mforwardfiles.add(backpathFile);
+			mbackwardfiles.remove(mbackwardfiles.size()-1);
+		}
+	}
+	
+	public void forward(){
+		
+		if (mforwardfiles.size() > 0) {
+			File forwardpathFile = mforwardfiles.get(mforwardfiles.size()-1);
+			open(forwardpathFile, true);
+			mbackwardfiles.add(forwardpathFile);
+			mforwardfiles.remove(mforwardfiles.size()-1);
+		}
+	}
+
+	
+	
+	public void refresh(){
+		if (mCurrentPathFile != null) {
+			open(mCurrentPathFile,false);
+		}
+	}
+	
 	private void createFolder(File newFile){
 		if (newFile.exists()) {
 			//Toast.makeText(activity, R.string.file_exists, Toast.LENGTH_SHORT).show();
@@ -502,7 +636,7 @@ public class HDExplorerActivity extends ListActivity {
 		if(requestCode == REQ_SYSTEM_SETTINGS)  
 		{  
 			loadSettings();
-			open(mCurrentPathFile);
+			open(mCurrentPathFile,false);
 		}
 	}
 
@@ -647,14 +781,7 @@ public class HDExplorerActivity extends ListActivity {
 		Log.i(TAG,"onKeyDown");
 		switch (keyCode) {
 		case KeyEvent.KEYCODE_BACK:
-			if((mCurrentPathFile.getAbsolutePath()).equals(sdcard))
-			{
-				showDialog(DIALOG_EXIT_APP);
-			}
-			else{
-				File f = mCurrentPathFile;
-				open(f.getParentFile());
-			}
+			upward();
 			return true;
 			//break;
 		default:
@@ -712,9 +839,9 @@ public class HDExplorerActivity extends ListActivity {
 		if(f == null)
 			return false;
 		switch (item.getItemId()) {
-		case R.id.open:
-			open(f);
-			return true;
+//		case R.id.open:
+//			open(f,true);
+//			return true;
 		case R.id.openwith:
 			openwith(f);
 			return true;
@@ -724,9 +851,9 @@ public class HDExplorerActivity extends ListActivity {
 		case R.id.cut:
 			cut(f);
 			return true;
-		case R.id.paste:
-			paste();
-			return true;
+//		case R.id.paste:
+//			paste();
+//			return true;
 		case R.id.rename:
 			rename(f);
 			return true;
@@ -748,7 +875,7 @@ public class HDExplorerActivity extends ListActivity {
 
 		File mselectedFile = madapter.getItem(position);
 		if(mselectedFile != null)
-			open(mselectedFile);
+			open(mselectedFile,true);
 	}
 
 	/**
@@ -938,6 +1065,13 @@ public class HDExplorerActivity extends ListActivity {
 		case FOLDER_CREATE:
 			break;
 		case FILE_RENAME:
+			if (mRenameFile == null) {
+				return ;
+			}	
+			AlertDialog mrenamedialog = (AlertDialog)dialog;
+
+			EditText renametext = (EditText) mrenamedialog.findViewById(R.id.file_name);
+			renametext.setText(mRenameFile.getName());
 			break;
 		case FILE_DETAILS:
 			if (mDetailFile == null) {
