@@ -1,47 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<string name="app_name">HDファイル管理プログラム</string>
+	<string name="emptydir">このファイルは空です</string>
+	<string name="button_text_yes">はい</string>
+	<string name="button_text_no">いいえ</string>
+	<string name="dialog_exit_app_title">ヒント</string>
+	<string name="dialog_exit_app_message">ＨＤファイル管理プログラムから退出しますか</string>
+	<string name="dialog_create_folder_title">新規作成</string>
+	<string name="dialog_file_rename_title">名前の変更</string>
+	<string name="dialog_file_details_title">プロパティ</string>
+	<string name="dialog_file_delete_title">確定</string>
+	<string name="dialog_file_delete_message">%1$sを削除しますか</string>
+	<string name="dialog_thanks_to_title">謝意を表する。</string>
+	<string name="dialog_thanks_to_message">本プログラムは楊輝さんによって開発、保護されている。それに、その中のアイコンは Matthieu James &lt;matthieu.james@gmail.com&gt; によって開発された\n\n 
+	    
+以下の人々のご支持とご援助を感謝いたします。\n\n
 
-    <string name="app_name">HDExplorer</string>
-    <string name="emptydir">The directory is empty.</string>
-    <string name="button_text_yes">Yes</string>
-    <string name="button_text_no">No</string>
-    <string name="dialog_exit_app_title">Tips</string>
-    <string name="dialog_exit_app_message">Are you sure to exit HDExplorer?</string>
-    <string name="dialog_create_folder_title">Create a folder</string>
-    <string name="dialog_file_rename_title">Rename</string>
-    <string name="dialog_file_details_title">Attribute</string>
-    <string name="menu_newfolder_title">New Folder</string>
-    <string name="menu_settings_title">Settings</string>
-    <string name="menu_open_title">Open</string>
-    <string name="menu_openwith_title">Open With</string>
-    <string name="menu_copy_title">Copy</string>
-    <string name="menu_cut_title">Cut</string>
-    <string name="menu_paste_title">Paste</string>
-    <string name="menu_rename_title">Rename</string>
-    <string name="menu_delete_title">Delete</string>
-    <string name="menu_attribute_title">Attribute</string>
-    <string name="dialog_attribute_file_name">Name</string>
-    <string name="dialog_attribute_file_size">Size</string>
-    <string name="dialog_attribute_file_lastmodified">Last modified</string>
-    <string name="preference_category_settings_title">General Settings</string>
-    <string name="preference_showhidden_title">Show Hidden Files</string>
-    <string name="preference_showhidden_key">showhidden</string>
-    <string name="preference_showhidden_summary">Whether to show the File which name start with "."</string>
-    <string name="preference_showhidden_default_value">false</string>
-    <string name="preference_category_about_title">About</string>
-    <string name="preference_help_title">Help</string>
-    <string name="preference_help_summary">Find answers to your HDExplorer questions here</string>
-    <string name="preference_help_intent_data">http://code.google.com/p/hdexplorer/w/list</string>
-    <string name="preference_feedback_title">Feedback</string>
-    <string name="preference_feedback_summary">Help us make the HDExplorer better</string>
-    <string name="preference_feedback_intent_data">http://code.google.com/p/hdexplorer/issues/list</string>
-    <string name="preference_thanks_title">Thanks</string>
-    <string name="preference_thanks_summary">Thanks to the people for their help and support</string>
-    <string name="preference_licenses_title">Open source licenses</string>
-    <string name="preference_licenses_summary">License details for open source software</string>
-    <string name="preference_version_title">Application version</string>
-    <string name="preference_version_summary">0.1.0</string>
-    <string name="MY_AD_UNIT_ID">a14edf7f7b7136a</string>
-    <string name="TEST_DEVICE_ID">HT07GL900363</string>
+<b>開発者</b>\n
+蒋金峰，Matthieu James\n\n
 
+<b>翻訳者</b>\n
+楊歓\n\n
+
+<b>テスト者</b>\n
+楊婷，胡大兰，付钱娟，蒋金峰，辛华胜，魏子雄，罗成
+	</string>		
+	<string name="menu_newfolder_title">新規作成</string>
+	<string name="menu_settings_title">設置</string>
+	<string name="menu_open_title">開く</string>
+	<string name="menu_openwith_title">プログラムから開く</string>
+	<string name="menu_copy_title">コピー</string>
+	<string name="menu_cut_title">切り取り</string>
+	<string name="menu_paste_title">貼り付け</string>
+	<string name="menu_rename_title">名前の変更</string>
+	<string name="menu_delete_title">削除</string>
+	<string name="menu_attribute_title">プロパティ</string>
+	<string name="dialog_attribute_file_name">名前</string>
+	<string name="dialog_attribute_file_size">サイズ</string>
+	<string name="dialog_attribute_file_lastmodified">更新日時</string>
+	<string name="preference_category_settings_title">常規の設置</string>
+	<string name="preference_showhidden_title">隠しファイルを表示します</string>
+	<string name="preference_showhidden_key">showhidden</string>
+	<string name="preference_showhidden_summary">"."を始めるファイルを表示しますか。</string>
+	<string name="preference_showhidden_default_value">false</string>
+	<string name="preference_category_about_title">アバウト</string>
+	<string name="preference_help_title">ヘルプ</string>
+	<string name="preference_help_summary">こちらでＨＤファイルプログラムに関する質問の答案を探す</string>
+	<string name="preference_help_intent_data">http://code.google.com/p/hdexplorer/w/list</string>
+	<string name="preference_feedback_title">フィードバック</string>
+	<string name="preference_feedback_summary">ＨＤファイルプログラムのサービスを向上するのを手伝いします</string>
+	<string name="preference_feedback_intent_data">http://code.google.com/p/hdexplorer/issues/list
+	</string>
+	<string name="preference_thanks_key">thanksto</string>
+	<string name="preference_thanks_title">謝意を表する</string>
+	<string name="preference_thanks_summary">皆様のご支持とご支援を感謝いたします</string>
+	<string name="preference_licenses_title">ソースコードの許可を開放します</string>
+	<string name="preference_licenses_summary">ソースコードプログラムの許可詳細を開放します。</string>
+	<string name="preference_licenses_intent_data">http://code.google.com/p/hdexplorer/wiki/License
+	</string>	
+	<string name="preference_version_title">応用プログラムの版本</string>
+	<string name="preference_version_summary">0.1.1</string>
+	<string name="MY_AD_UNIT_ID">a14edf7f7b7136a</string>
+	<string name="TEST_DEVICE_ID">HT07GL900363</string>
 </resources>

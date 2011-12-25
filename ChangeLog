@@ -3,3 +3,11 @@ All ChangeLog about the software can be found in the git logs.
 If you have not install git,you can instal it from http://git-scm.com/
 
 And learn how to use it from http://progit.org/
+
+0.1.1
+===
+* Check the path of the SDCard automatically.
+
+0.1.0
+===
+* First public release

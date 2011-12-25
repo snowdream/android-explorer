@@ -9,6 +9,23 @@
 	<string name="dialog_create_folder_title">新建文件夹</string>
 	<string name="dialog_file_rename_title">重命名</string>
 	<string name="dialog_file_details_title">属性</string>
+	<string name="dialog_file_delete_title">确认</string>
+	<string name="dialog_file_delete_message">你确定要删除 %1$s 吗？</string>
+	<string name="dialog_thanks_to_title">致谢</string>
+	<string name="dialog_thanks_to_message">
+本软件由 杨辉 &lt;yanghui1986527@gmail.com&gt; 进行开发和维护，其中包含的图标集由 Matthieu James &lt;matthieu.james@gmail.com&gt; 开发。\n\n
+
+感谢以下人员对我的支持和帮助。\n\n
+
+<b>开发者</b>\n
+蒋金峰，Matthieu James\n\n
+
+<b>翻译者</b>\n
+杨欢\n\n
+
+<b>测试者</b>\n
+杨婷，胡大兰，付钱娟，蒋金峰，辛华胜，魏子雄，罗成
+	</string>			
 	<string name="menu_newfolder_title">新建文件夹</string>
 	<string name="menu_settings_title">设置</string>
 	<string name="menu_open_title">打开</string>
@@ -35,12 +52,15 @@
 	<string name="preference_feedback_summary">帮助我们改进 HD文件管理器 的服务</string>
 	<string name="preference_feedback_intent_data">http://code.google.com/p/hdexplorer/issues/list
 	</string>
+	<string name="preference_thanks_key">thanksto</string>
 	<string name="preference_thanks_title">致谢</string>
 	<string name="preference_thanks_summary">感谢各位对我的支持和帮助</string>
 	<string name="preference_licenses_title">开放源代码许可</string>
 	<string name="preference_licenses_summary">开放源代码软件的许可详情</string>
+	<string name="preference_licenses_intent_data">http://code.google.com/p/hdexplorer/wiki/License
+	</string>	
 	<string name="preference_version_title">应用程序版本</string>
-	<string name="preference_version_summary">0.1.0</string>
+	<string name="preference_version_summary">0.1.1</string>
 	<string name="MY_AD_UNIT_ID">a14edf7f7b7136a</string>
 	<string name="TEST_DEVICE_ID">HT07GL900363</string>
 </resources>
