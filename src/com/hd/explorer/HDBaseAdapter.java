@@ -32,6 +32,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -158,16 +159,19 @@ public class HDBaseAdapter extends BaseAdapter {
 		return icon;
 	}
 
-	public Drawable getApkIcon(String archiveFilePath){      
+	public Drawable getApkIcon(String path){      
 		PackageManager pm = mcontext.getPackageManager();      
-		PackageInfo info = pm.getPackageArchiveInfo(archiveFilePath, PackageManager.GET_ACTIVITIES);      
+		PackageInfo info = pm.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES);      
 		if(info != null){      
-			ApplicationInfo appInfo = info.applicationInfo;      
-			//String appName = pm.getApplicationLabel(appInfo).toString();      
-			//String packageName = appInfo.packageName;      
-			Drawable icon = pm.getApplicationIcon(appInfo);     
-			return icon;
-		}    
+	   		 ApplicationInfo appInfo = info.applicationInfo;
+	   		 
+	   		 if(Build.VERSION.SDK_INT >= 8){
+	   			appInfo.sourceDir = path;
+	   			appInfo.publicSourceDir = path;
+	   		 }
+	   		 
+	   		 return appInfo.loadIcon(pm);
+		}   		
 		return null;
 	}
 
