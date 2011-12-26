@@ -159,7 +159,7 @@ public class HDExplorerActivity extends ListActivity {
 		checkEnvironment();
 		initToolbar();
 		init();
-		loadAdView();
+		//loadAdView();
 	}
 
 	/**
