@@ -4,6 +4,12 @@ If you have not install git,you can instal it from http://git-scm.com/
 
 And learn how to use it from http://progit.org/
 
+
+0.1.2
+===
+* Hide the advisement
+* Add Thumbnail for apk files
+
 0.1.1
 ===
 * Check the path of the SDCard automatically.
