@@ -40,6 +40,7 @@ import com.hd.Constant;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ListActivity;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -367,12 +368,16 @@ public class HDExplorerActivity extends ListActivity {
 			return;
 
 		if(f.isFile()){
-			Intent intent = new Intent();
-			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			intent.setAction(Intent.ACTION_VIEW);
-			String type = Constant.getMIMEType(f);
-			intent.setDataAndType(Uri.fromFile(f), type);
-			startActivity(intent);    
+			try {
+				Intent intent = new Intent();
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.setAction(Intent.ACTION_VIEW);
+				String type = Constant.getMIMEType(f);
+				intent.setDataAndType(Uri.fromFile(f), type);
+				startActivity(intent);
+			} catch (ActivityNotFoundException e) {
+				e.printStackTrace();
+			}    
 
 		}else if(f.isDirectory()){
 			deleteAllItems();
@@ -414,12 +419,16 @@ public class HDExplorerActivity extends ListActivity {
 		}
 
 		if(f.isFile()){
-			Intent intent = new Intent();
-			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			intent.setAction(Intent.ACTION_VIEW);
-			String type = Constant.getMIMEType(f);
-			intent.setDataAndType(Uri.fromFile(f), type);
-			startActivity(intent);    
+			try {
+				Intent intent = new Intent();
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.setAction(Intent.ACTION_VIEW);
+				String type = Constant.getMIMEType(f);
+				intent.setDataAndType(Uri.fromFile(f), type);
+				startActivity(intent);
+			} catch (ActivityNotFoundException e) {
+				e.printStackTrace();
+			}    
 
 		}
 	}
