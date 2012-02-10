@@ -32,19 +32,14 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdView;
-import com.hd.Constant;
-
-
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.DialogInterface.OnClickListener;
 import android.content.res.Configuration;
 import android.content.res.Resources.NotFoundException;
 import android.net.Uri;
@@ -53,6 +48,7 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -60,13 +56,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
+
+import com.google.ads.AdRequest;
+import com.google.ads.AdView;
+import com.hd.Constant;
 
 /**
  * 
@@ -80,7 +80,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
  *
  * @see 	 
  */
-public class HDExplorerActivity extends ListActivity {
+public class HDExplorerActivity extends Activity implements OnItemClickListener{
 
 	private static final String TAG = "HDExplorer";
 	//Boolean Flags
@@ -134,7 +134,12 @@ public class HDExplorerActivity extends ListActivity {
 	ImageButton mforward = null;
 	ImageButton mrefresh = null;
 
+	//ListView
+	 ListView mListView = null;
 
+	 //TextView 
+	 TextView mEmptyView = null;
+	 
 	/**
 	 * 
 	 * onCreate: Called when the activity is first created.
@@ -155,7 +160,6 @@ public class HDExplorerActivity extends ListActivity {
 
 		setContentView(R.layout.main);
 
-		registerForContextMenu(getListView());
 
 		checkEnvironment();
 		initToolbar();
@@ -265,7 +269,16 @@ public class HDExplorerActivity extends ListActivity {
 	public void init(){
 		Log.i(TAG,"init");
 		// adView = new AdView(this, AdSize.BANNER, getString(R.string.MY_AD_UNIT_ID));
+		
+		mEmptyView=(TextView)findViewById(R.id.empty);  
 
+		mListView=(ListView)findViewById(R.id.listview);  
+		
+		registerForContextMenu(mListView);
+		mListView.setOnItemClickListener(this);
+
+		mListView.setEmptyView(mEmptyView);
+		
 		mfiles = new ArrayList<File>();
 
 		mbackwardfiles = new ArrayList<File>();
@@ -274,7 +287,7 @@ public class HDExplorerActivity extends ListActivity {
 
 		madapter = new HDBaseAdapter(this,mfiles);	
 
-		setListAdapter(madapter);
+		mListView.setAdapter(madapter);
 
 		File sdf = new File(mSDCardPath);
 
@@ -928,13 +941,12 @@ public class HDExplorerActivity extends ListActivity {
 		}
 	}
 
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		super.onListItemClick(l, v, position, id);
 
+	@Override
+	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		File mselectedFile = madapter.getItem(position);
 		if(mselectedFile != null)
-			open(mselectedFile,true);
+			open(mselectedFile,true);		
 	}
 
 	/**
@@ -1231,7 +1243,7 @@ public class HDExplorerActivity extends ListActivity {
 			showDialog(FOLDER_CREATE);
 			return true;
 		case R.id.settings:
-			startActivityForResult(new Intent(HDExplorerActivity.this, HDSettingsActivity.class), REQ_SYSTEM_SETTINGS);  
+			startActivityForResult(new Intent(HDExplorerActivity.this, HDPreferenceActivity.class), REQ_SYSTEM_SETTINGS);  
 			return true;
 		default:
 			break;
@@ -1239,4 +1251,5 @@ public class HDExplorerActivity extends ListActivity {
 		}	
 		return false;
 	}
+
 }

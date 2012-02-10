@@ -27,7 +27,7 @@
         <activity
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/app_name"
-            android:name=".HDSettingsActivity"
+            android:name=".HDPreferenceActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
     </application>

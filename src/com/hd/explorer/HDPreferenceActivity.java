@@ -35,7 +35,7 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.util.Log;
 import android.view.WindowManager;
 
-public class HDSettingsActivity extends PreferenceActivity implements
+public class HDPreferenceActivity extends PreferenceActivity implements
 OnPreferenceChangeListener, OnPreferenceClickListener {
 
 	private static final String TAG = "HDSettings";

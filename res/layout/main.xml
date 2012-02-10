@@ -1,135 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:id="@+id/mainLayout"
-	android:layout_width="fill_parent" android:layout_height="fill_parent">
+    android:id="@+id/mainLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
 
-    <LinearLayout android:id="@+id/LinearLayout01"
-	android:layout_width="fill_parent" android:layout_height="wrap_content"
-	android:orientation="vertical">
-    	<LinearLayout android:id="@+id/LinearLayout05"
-		android:layout_height="2sp" android:layout_width="fill_parent"
-		android:background="#888888">
-	</LinearLayout>
-	<LinearLayout android:orientation="vertical" 
-		android:paddingTop="1.0dip" android:layout_width="fill_parent"
-		android:background="#5B5B5B" android:layout_height="wrap_content"
-		xmlns:android="http://schemas.android.com/apk/res/android">
-		<LinearLayout android:orientation="horizontal"
-			android:background="@drawable/toolbar_top_frame"
-			android:layout_width="fill_parent" android:layout_height="7.0dip"
-			android:layout_alignParentTop="true" />
+    <LinearLayout
+        android:id="@+id/LinearLayout01"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-		<HorizontalScrollView android:id="@+id/HorizontalScrollView01" 
-			android:fadingEdgeLength="0.0dip" android:background="#5B5B5B"
-			android:layout_width="fill_parent" android:scrollbars="none"
-			android:layout_height="fill_parent">
+        <LinearLayout
+            android:id="@+id/LinearLayout05"
+            android:layout_width="fill_parent"
+            android:layout_height="2sp"
+            android:background="#888888" >
+        </LinearLayout>
 
-			<LinearLayout
-			    android:id="@+id/toolbar_items"
-			    android:layout_width="wrap_content"
-			    android:layout_height="58dp"
-			    android:layout_gravity="center"
-			    android:orientation="horizontal"
-			    android:paddingBottom="7.0dip"
-			    android:paddingTop="7.0dip" >
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#5B5B5B"
+            android:orientation="vertical"
+            android:paddingTop="1.0dip" >
 
-				<ImageView
-				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"
-				    android:src="@drawable/toolbar_slider_grip_left" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="7.0dip"
+                android:background="@drawable/toolbar_top_frame"
+                android:orientation="horizontal" />
 
-				<LinearLayout android:layout_width="wrap_content"
-					android:background="#ffffff" android:layout_height="wrap_content">
-					<ImageButton android:id="@+id/paste" android:visibility="gone"
-						android:layout_width="wrap_content" android:layout_height="wrap_content"
-						android:scaleType="centerInside" android:background="@drawable/icon_toolbar_paste">
-					</ImageButton>
+            <HorizontalScrollView
+                android:id="@+id/HorizontalScrollView01"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#5B5B5B"
+                android:fadingEdgeLength="0.0dip"
+                android:scrollbars="none" >
 
-					<LinearLayout android:paddingLeft="12.0dip"
-						android:layout_height="wrap_content" android:layout_width="1sp"
-						android:background="#000000">
-					</LinearLayout>
+                <LinearLayout
+                    android:id="@+id/toolbar_items"
+                    android:layout_width="wrap_content"
+                    android:layout_height="58dp"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingBottom="7.0dip"
+                    android:paddingTop="7.0dip" >
 
-					<ImageButton android:id="@+id/home"
-						android:layout_width="wrap_content" android:layout_height="wrap_content"
-						android:scaleType="centerInside" android:background="@drawable/icon_toolbar_home">
-					</ImageButton>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/toolbar_slider_grip_left" />
 
-					<LinearLayout android:layout_height="wrap_content"
-						android:layout_width="1sp" android:background="#000000">
-					</LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#ffffff" >
 
-					<ImageButton android:id="@+id/upward"
-						android:layout_width="wrap_content" android:layout_height="wrap_content"
-						android:scaleType="centerInside" android:background="@drawable/icon_toolbar_upward">
-					</ImageButton>
+                        <ImageButton
+                            android:id="@+id/paste"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/icon_toolbar_paste"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerInside"
+                            android:visibility="gone" >
+                        </ImageButton>
 
+                        <LinearLayout
+                            android:layout_width="1sp"
+                            android:layout_height="wrap_content"
+                            android:background="#000000"
+                            android:paddingLeft="12.0dip" >
+                        </LinearLayout>
 
-					<LinearLayout android:layout_height="wrap_content"
-						android:layout_width="1sp" android:background="#000000">
-					</LinearLayout>
+                        <ImageButton
+                            android:id="@+id/home"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/icon_toolbar_home"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerInside" >
+                        </ImageButton>
 
+                        <LinearLayout
+                            android:layout_width="1sp"
+                            android:layout_height="wrap_content"
+                            android:background="#000000" >
+                        </LinearLayout>
 
+                        <ImageButton
+                            android:id="@+id/upward"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/icon_toolbar_upward"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerInside" >
+                        </ImageButton>
 
-					<ImageButton android:id="@+id/backward"
-						android:layout_width="wrap_content" android:layout_height="wrap_content"
-						android:scaleType="centerInside" android:background="@drawable/icon_toolbar_backward">
-					</ImageButton>
+                        <LinearLayout
+                            android:layout_width="1sp"
+                            android:layout_height="wrap_content"
+                            android:background="#000000" >
+                        </LinearLayout>
 
+                        <ImageButton
+                            android:id="@+id/backward"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/icon_toolbar_backward"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerInside" >
+                        </ImageButton>
 
-					<LinearLayout android:layout_height="wrap_content"
-						android:layout_width="1sp" android:background="#000000">
-					</LinearLayout>
+                        <LinearLayout
+                            android:layout_width="1sp"
+                            android:layout_height="wrap_content"
+                            android:background="#000000" >
+                        </LinearLayout>
 
-					<ImageButton android:id="@+id/forward"
-						android:layout_width="wrap_content" android:layout_height="wrap_content" 
-						android:scaleType="centerInside" android:background="@drawable/icon_toolbar_forward">
-					</ImageButton>
+                        <ImageButton
+                            android:id="@+id/forward"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/icon_toolbar_forward"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerInside" >
+                        </ImageButton>
 
-					<LinearLayout android:layout_height="wrap_content"
-						android:layout_width="1sp" android:background="#000000">
-					</LinearLayout>
+                        <LinearLayout
+                            android:layout_width="1sp"
+                            android:layout_height="wrap_content"
+                            android:background="#000000" >
+                        </LinearLayout>
 
-					<ImageButton android:id="@+id/refresh"
-						android:layout_width="wrap_content" android:layout_height="wrap_content"
-						android:scaleType="centerInside" android:background="@drawable/icon_toolbar_refresh">
-					</ImageButton>
+                        <ImageButton
+                            android:id="@+id/refresh"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/icon_toolbar_refresh"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerInside" >
+                        </ImageButton>
+                    </LinearLayout>
 
-				</LinearLayout>
-				<ImageView android:layout_width="wrap_content" 
-					android:layout_height="wrap_content" android:src="@drawable/toolbar_slider_grip_right" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/toolbar_slider_grip_right" />
+                </LinearLayout>
+            </HorizontalScrollView>
 
-			</LinearLayout>
-		</HorizontalScrollView>
-		<LinearLayout android:orientation="horizontal"
-			android:background="@drawable/toolbar_bottom_frame"
-			android:layout_width="fill_parent" android:layout_height="7.0dip"
-			android:layout_alignParentTop="true" />
-	</LinearLayout>
-	<LinearLayout android:id="@+id/LinearLayout06"
-		android:layout_height="2sp" android:layout_width="fill_parent"
-		android:background="#888888">
-	</LinearLayout>
-    			</LinearLayout>
-	    
-	<ListView android:id="@id/android:list" android:layout_width="fill_parent"
-		android:layout_height="fill_parent" android:layout_weight="1"
-		android:background="#FFFFFFFF" android:cacheColorHint="#00000000" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="7.0dip"
+                android:background="@drawable/toolbar_bottom_frame"
+                android:orientation="horizontal" />
+        </LinearLayout>
 
-	<TextView android:id="@id/android:empty" android:layout_width="fill_parent"
-		android:layout_height="fill_parent" android:gravity="center"
-		android:layout_weight="1" android:background="#FFFFFFFF"
-		android:textColor="#000000" android:text="@string/emptydir" />
+        <LinearLayout
+            android:id="@+id/LinearLayout06"
+            android:layout_width="fill_parent"
+            android:layout_height="2sp"
+            android:background="#888888" >
+        </LinearLayout>
+    </LinearLayout>
 
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
-		android:orientation="vertical" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:background="#FFFFFFFF" >
-		<com.google.ads.AdView android:id="@+id/adView"
-			android:layout_width="wrap_content" android:layout_height="wrap_content"
-			android:layout_gravity="center" 
-			ads:adUnitId="@string/MY_AD_UNIT_ID" ads:adSize="BANNER"
-			ads:testDevices="@string/TEST_DEVICE_ID" ads:loadAdOnCreate="true"  />
-	</LinearLayout>
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="#FFFFFFFF"
+        android:cacheColorHint="#00000000" />
+
+    <TextView
+        android:id="@+id/empty"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="#FFFFFFFF"
+        android:gravity="center"
+        android:text="@string/emptydir"
+        android:textColor="#000000" />
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFFFF"
+        android:orientation="vertical" >
+
+        <com.google.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/MY_AD_UNIT_ID"
+            ads:loadAdOnCreate="true"
+            ads:testDevices="@string/TEST_DEVICE_ID" />
+    </LinearLayout>
 
 </LinearLayout>
