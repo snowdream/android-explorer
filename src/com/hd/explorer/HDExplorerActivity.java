@@ -60,6 +60,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -133,13 +134,17 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener{
 	ImageButton mbackward = null;
 	ImageButton mforward = null;
 	ImageButton mrefresh = null;
+	ImageButton mviewmode = null;
 
 	//ListView
-	 ListView mListView = null;
+	ListView mListView = null;
+	
+	//GridView
+	GridView mGridView = null;
 
-	 //TextView 
-	 TextView mEmptyView = null;
-	 
+	//TextView 
+	TextView mEmptyView = null;
+
 	/**
 	 * 
 	 * onCreate: Called when the activity is first created.
@@ -180,18 +185,54 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener{
 		File f = null; 
 		boolean sdCardExist = Environment.getExternalStorageState()   
 				.equals(Environment.MEDIA_MOUNTED);   //判断sd卡是否存在 
-				if   (sdCardExist)   
-				{                               
-					f = Environment.getExternalStorageDirectory();//获取sd卡目录 
-					if (f != null) {
-						mSDCardPath = f.getAbsolutePath();
-					}
-					
-					f = Environment.getRootDirectory();//获取根目录 
-					if (f != null) {
-						mRootPath = f.getAbsolutePath();
-					}       
-				}   	
+		if   (sdCardExist)   
+		{                               
+			f = Environment.getExternalStorageDirectory();//获取sd卡目录 
+			if (f != null) {
+				mSDCardPath = f.getAbsolutePath();
+			}
+
+			f = Environment.getRootDirectory();//获取根目录 
+			if (f != null) {
+				mRootPath = f.getAbsolutePath();
+			}       
+		}   	
+
+	}
+
+	public void swapViewMode(){
+		switch (madapter.getViewMode()) {
+		case HDBaseAdapter.VIEWMODE_LIST:
+			setViewMode(HDBaseAdapter.VIEWMODE_ICON);
+			mviewmode.setBackgroundResource(R.drawable.icon_toolbar_list);
+			break;
+		case HDBaseAdapter.VIEWMODE_ICON:
+			setViewMode(HDBaseAdapter.VIEWMODE_LIST);
+			mviewmode.setBackgroundResource(R.drawable.icon_toolbar_icons);
+			break;
+		default:
+			break;
+		}		
+		
+	}
+	
+	public void setViewMode(int viewmode){
+		switch (viewmode) {
+		case HDBaseAdapter.VIEWMODE_LIST:
+			madapter.setViewMode(HDBaseAdapter.VIEWMODE_LIST);
+			mListView.setAdapter(madapter);
+			mGridView.setAdapter(null);
+			madapter.notifyDataSetChanged();
+			break;
+		case HDBaseAdapter.VIEWMODE_ICON:
+			madapter.setViewMode(HDBaseAdapter.VIEWMODE_ICON);
+			mListView.setAdapter(null);
+			mGridView.setAdapter(madapter);
+			madapter.notifyDataSetChanged();
+			break;
+		default:
+			break;
+		}
 
 	}
 	
@@ -255,7 +296,16 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener{
 			public void onClick(View v) {
 				refresh();
 			}
-		});				
+		});	
+
+		mviewmode = (ImageButton) findViewById(R.id.viewmode);
+		mviewmode.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				swapViewMode();
+			}
+		});			
+		
 	}
 
 	/**
@@ -269,15 +319,23 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener{
 	public void init(){
 		Log.i(TAG,"init");
 		// adView = new AdView(this, AdSize.BANNER, getString(R.string.MY_AD_UNIT_ID));
-		
+
 		mEmptyView=(TextView)findViewById(R.id.empty);  
 
 		mListView=(ListView)findViewById(R.id.listview);  
-		
+
 		registerForContextMenu(mListView);
 		mListView.setOnItemClickListener(this);
 
 		mListView.setEmptyView(mEmptyView);
+
+		mGridView = (GridView)findViewById(R.id.gridview); 
+		
+		registerForContextMenu(mGridView);
+		mGridView.setOnItemClickListener(this);
+
+		mGridView.setEmptyView(mEmptyView);		
+		
 		
 		mfiles = new ArrayList<File>();
 
@@ -287,8 +345,11 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener{
 
 		madapter = new HDBaseAdapter(this,mfiles);	
 
-		mListView.setAdapter(madapter);
+		//mListView.setAdapter(madapter);
 
+		//mGridView.setAdapter(madapter);
+		setViewMode(HDBaseAdapter.VIEWMODE_LIST);
+		
 		File sdf = new File(mSDCardPath);
 
 		loadSettings();

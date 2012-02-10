@@ -53,9 +53,14 @@ import android.widget.TextView;
  * @see 	 
  */
 public class HDBaseAdapter extends BaseAdapter {
+	// viewmode 
+	public static final int VIEWMODE_LIST = 0;
+	public static final int VIEWMODE_ICON = 1;
 
 	private Context mcontext = null;
 	private List<File> mfiles = null;
+
+	private int mViewMode = VIEWMODE_ICON;
 
 	public HDBaseAdapter(Context context, List<File> files) {
 		mcontext = context;
@@ -97,44 +102,87 @@ public class HDBaseAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Holder holder = null;
-		if(convertView==null)
+		ListHolder mListHolder = null;
+		GridHolder mGridHolder = null;
+
+		switch (mViewMode) {
+		case VIEWMODE_LIST:
 		{
-			convertView=LayoutInflater.from(mcontext).inflate(R.layout.item_row, null);
-			holder=new Holder();
-			holder.mfileIcon=(ImageView) convertView.findViewById(R.id.fileicon);
-			holder.mfileName=(TextView) convertView.findViewById(R.id.filename);
-			holder.mfileSize=(TextView) convertView.findViewById(R.id.filesize);
-			holder.mfileTime=(TextView) convertView.findViewById(R.id.filetime);
-			convertView.setTag(holder);
-		}else
-		{
-			holder=(Holder) convertView.getTag();
+			if(convertView==null)
+			{
+				convertView=LayoutInflater.from(mcontext).inflate(R.layout.item_listview, null);
+				mListHolder=new ListHolder();
+				mListHolder.mfileIcon=(ImageView) convertView.findViewById(R.id.listview_fileicon);
+				mListHolder.mfileName=(TextView) convertView.findViewById(R.id.listview_filename);
+				mListHolder.mfileSize=(TextView) convertView.findViewById(R.id.listview_filesize);
+				mListHolder.mfileTime=(TextView) convertView.findViewById(R.id.listview_filetime);
+				convertView.setTag(mListHolder);
+			}else
+			{
+				mListHolder=(ListHolder) convertView.getTag();
+			}
+
+			//update the holder
+			File f = this.getItem(position);
+			if(f != null){
+				int icon = this.getFileIcon(f);
+				if(icon == -1){
+					Drawable drawable = this.getApkIcon(f.getAbsolutePath());
+					if(drawable != null){
+						mListHolder.mfileIcon.setImageDrawable(drawable);
+					}
+					else{
+						mListHolder.mfileIcon.setImageResource(R.drawable.icon_file);
+					}
+				}else{
+					mListHolder.mfileIcon.setImageResource(icon);
+				}
+				mListHolder.mfileName.setText(f.getName());
+				if(f.isFile()){
+					mListHolder.mfileSize.setText(this.getFileSize(f.length()));
+				}else {
+					mListHolder.mfileSize.setText("");
+
+				}
+				mListHolder.mfileTime.setText(this.getFileTime(f.lastModified()));
+			}
 		}
-
-		//update the holder
-		File f = this.getItem(position);
-		if(f != null){
-			int icon = this.getFileIcon(f);
-			if(icon == -1){
-				Drawable drawable = this.getApkIcon(f.getAbsolutePath());
-				if(drawable != null){
-					holder.mfileIcon.setImageDrawable(drawable);
-				}
-				else{
-					holder.mfileIcon.setImageResource(R.drawable.icon_file);
-				}
-			}else{
-				holder.mfileIcon.setImageResource(icon);
+		break;
+		case VIEWMODE_ICON:
+		{
+			if(convertView==null)
+			{
+				convertView=LayoutInflater.from(mcontext).inflate(R.layout.item_gridview, null);
+				mGridHolder=new GridHolder();
+				mGridHolder.mfileIcon=(ImageView) convertView.findViewById(R.id.gridview_fileicon);
+				mGridHolder.mfileName=(TextView) convertView.findViewById(R.id.gridview_filename);
+				convertView.setTag(mGridHolder);
+			}else
+			{
+				mGridHolder=(GridHolder) convertView.getTag();
 			}
-			holder.mfileName.setText(f.getName());
-			if(f.isFile()){
-				holder.mfileSize.setText(this.getFileSize(f.length()));
-			}else {
-				holder.mfileSize.setText("");
 
+			//update the holder
+			File f = this.getItem(position);
+			if(f != null){
+				int icon = this.getFileIcon(f);
+				if(icon == -1){
+					Drawable drawable = this.getApkIcon(f.getAbsolutePath());
+					if(drawable != null){
+						mGridHolder.mfileIcon.setImageDrawable(drawable);
+					}
+					else{
+						mGridHolder.mfileIcon.setImageResource(R.drawable.icon_file);
+					}
+				}else{
+					mGridHolder.mfileIcon.setImageResource(icon);
+				}
+				mGridHolder.mfileName.setText(f.getName());
 			}
-			holder.mfileTime.setText(this.getFileTime(f.lastModified()));
+		}
+		break;
+		default:
+			break;
 		}
 
 		return convertView;
@@ -151,7 +199,7 @@ public class HDBaseAdapter extends BaseAdapter {
 		else{
 			Resources res = mcontext.getResources();  
 			icon =res.getIdentifier(str,"drawable",mcontext.getPackageName());  
-			
+
 			if(icon <= 0 )
 				icon = R.drawable.icon_file;
 		}
@@ -163,14 +211,14 @@ public class HDBaseAdapter extends BaseAdapter {
 		PackageManager pm = mcontext.getPackageManager();      
 		PackageInfo info = pm.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES);      
 		if(info != null){      
-	   		 ApplicationInfo appInfo = info.applicationInfo;
-	   		 
-	   		 if(Build.VERSION.SDK_INT >= 8){
-	   			appInfo.sourceDir = path;
-	   			appInfo.publicSourceDir = path;
-	   		 }
-	   		 
-	   		 return appInfo.loadIcon(pm);
+			ApplicationInfo appInfo = info.applicationInfo;
+
+			if(Build.VERSION.SDK_INT >= 8){
+				appInfo.sourceDir = path;
+				appInfo.publicSourceDir = path;
+			}
+
+			return appInfo.loadIcon(pm);
 		}   		
 		return null;
 	}
@@ -204,11 +252,24 @@ public class HDBaseAdapter extends BaseAdapter {
 		return mstrbuf.toString();
 	}
 
-	class Holder{
+	public int getViewMode()	{
+		return mViewMode;
+	}
+
+	public void setViewMode(int ViewMode){
+		mViewMode = ViewMode;
+	}
+
+	static class ListHolder{
 		ImageView mfileIcon;
 		TextView mfileName;
 		TextView mfileSize;
 		TextView mfileTime;
+	}
+
+	static class GridHolder{
+		ImageView mfileIcon;
+		TextView mfileName;
 	}
 }
 

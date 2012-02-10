@@ -4,13 +4,14 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="4px" >
+    android:padding="4dp" >
 
     <ImageView
-        android:id="@+id/fileicon"
+        android:id="@+id/listview_fileicon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:contentDescription="@string/app_name" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -18,14 +19,14 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/filename"
+            android:id="@+id/listview_filename"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:singleLine="true"
             android:textColor="#000000"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:singleLine="true"
-            android:ellipsize="marquee" />
+            android:textStyle="bold" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -33,21 +34,20 @@
             android:orientation="horizontal" >
 
             <TextView
-                android:id="@+id/filesize"
+                android:id="@+id/listview_filesize"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:textColor="#000000"
                 android:textSize="14sp" />
-            
+
             <TextView
-                android:id="@+id/filetime"
+                android:id="@+id/listview_filetime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:textColor="#000000"
                 android:textSize="14sp" />
-            
         </RelativeLayout>
     </LinearLayout>
 

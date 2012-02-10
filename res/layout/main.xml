@@ -145,6 +145,21 @@
                             android:contentDescription="@string/app_name"
                             android:scaleType="centerInside" >
                         </ImageButton>
+
+                        <LinearLayout
+                            android:layout_width="1sp"
+                            android:layout_height="wrap_content"
+                            android:background="#000000" >
+                        </LinearLayout>
+
+                        <ImageButton
+                            android:id="@+id/viewmode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/icon_toolbar_icons"
+                            android:contentDescription="@string/app_name"
+                            android:scaleType="centerInside" >
+                        </ImageButton>
                     </LinearLayout>
 
                     <ImageView
@@ -177,6 +192,19 @@
         android:layout_weight="1"
         android:background="#FFFFFFFF"
         android:cacheColorHint="#00000000" />
+
+    <GridView
+        android:id="@+id/gridview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="#FFFFFFFF"
+        android:columnWidth="90dp"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp" />
 
     <TextView
         android:id="@+id/empty"
