@@ -64,6 +64,7 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
@@ -88,11 +89,10 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener{
 	private boolean misFullScreen = true;
 
 	//Dialogs ID
-	private final int DIALOG_EXIT_APP = 0;
-	private final int FOLDER_CREATE =1;
-	private final int FILE_RENAME =2;
-	private final int FILE_DETAILS =3;
-	private final int FILE_DELETE = 4;
+	private final int FOLDER_CREATE =0;
+	private final int FILE_RENAME =1;
+	private final int FILE_DETAILS =2;
+	private final int FILE_DELETE = 3;
 
 	//the data source
 	List<File> mfiles = null; 
@@ -138,7 +138,7 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener{
 
 	//ListView
 	ListView mListView = null;
-	
+
 	//GridView
 	GridView mGridView = null;
 
@@ -213,9 +213,9 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener{
 		default:
 			break;
 		}		
-		
+
 	}
-	
+
 	public void setViewMode(int viewmode){
 		switch (viewmode) {
 		case HDBaseAdapter.VIEWMODE_LIST:
@@ -235,7 +235,7 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener{
 		}
 
 	}
-	
+
 	/**
 	 * 
 	 * init: Init the Toolbar 
@@ -305,7 +305,7 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener{
 				swapViewMode();
 			}
 		});			
-		
+
 	}
 
 	/**
@@ -330,13 +330,13 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener{
 		mListView.setEmptyView(mEmptyView);
 
 		mGridView = (GridView)findViewById(R.id.gridview); 
-		
+
 		registerForContextMenu(mGridView);
 		mGridView.setOnItemClickListener(this);
 
 		mGridView.setEmptyView(mEmptyView);		
-		
-		
+
+
 		mfiles = new ArrayList<File>();
 
 		mbackwardfiles = new ArrayList<File>();
@@ -349,7 +349,7 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener{
 
 		//mGridView.setAdapter(madapter);
 		setViewMode(HDBaseAdapter.VIEWMODE_LIST);
-		
+
 		File sdf = new File(mSDCardPath);
 
 		loadSettings();
@@ -634,10 +634,19 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener{
 		showDialog(FILE_DETAILS);
 	}
 
+	private static long exitTime = 0;  
 	public void upward(){
 		if((mCurrentPathFile.getAbsolutePath()).equals(mSDCardPath))
 		{
-			showDialog(DIALOG_EXIT_APP);
+			if((System.currentTimeMillis()-exitTime) > 2000){  
+				Toast.makeText(this, R.string.toast_exit_tips, Toast.LENGTH_SHORT).show();  
+				exitTime = System.currentTimeMillis();  
+			}  
+			else{  
+				finish();  
+				System.exit(0);  
+			}  
+
 		}
 		else{
 			File f = mCurrentPathFile;
@@ -1022,26 +1031,6 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener{
 	protected Dialog onCreateDialog(int id) {
 		Log.i(TAG,"onCreateDialog");
 		switch (id) {
-		case DIALOG_EXIT_APP:
-			AlertDialog.Builder mexitDialog = new AlertDialog.Builder(this);
-			mexitDialog.setIcon(android.R.drawable.ic_dialog_alert);
-			mexitDialog.setTitle(R.string.dialog_exit_app_title);
-			mexitDialog.setMessage(R.string.dialog_exit_app_message);
-			mexitDialog.setPositiveButton(R.string.button_text_yes, new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					finish();
-				}
-			});
-			mexitDialog.setNegativeButton(R.string.button_text_no, new DialogInterface.OnClickListener() {
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.cancel();
-				}
-			});
-			return mexitDialog.create();
 		case FOLDER_CREATE:
 			AlertDialog.Builder mcreatedialog = new AlertDialog.Builder(this);
 			View layout = LayoutInflater.from(this).inflate(R.layout.file_create, null);
@@ -1217,8 +1206,6 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener{
 	protected void onPrepareDialog(int id, Dialog dialog) {
 		Log.i(TAG,"onPrepareDialog");
 		switch (id) {
-		case DIALOG_EXIT_APP:
-			break;
 		case FOLDER_CREATE:
 			break;
 		case FILE_RENAME:

@@ -5,8 +5,7 @@
 	<string name="emptydir">The directory is empty.</string>
 	<string name="button_text_yes">Yes</string>
 	<string name="button_text_no">No</string>
-	<string name="dialog_exit_app_title">Tips</string>
-	<string name="dialog_exit_app_message">Are you sure to exit HDExplorer?</string>
+	<string name="toast_exit_tips">Press back again to exit.</string>
 	<string name="dialog_create_folder_title">Create a folder</string>
 	<string name="dialog_file_rename_title">Rename</string>
 	<string name="dialog_file_details_title">Attribute</string>

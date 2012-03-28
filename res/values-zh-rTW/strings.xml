@@ -1,66 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">HD檔案管理器</string>
-	<string name="emptydir">該資料夾為空</string>
-	<string name="button_text_yes">確定</string>
-	<string name="button_text_no">取消</string>
-	<string name="dialog_exit_app_title">提示</string>
-	<string name="dialog_exit_app_message">你確定要退出 HD檔案管理器？ </string>
-	<string name="dialog_create_folder_title">新建資料夾</string>
-	<string name="dialog_file_rename_title">重命名</string>
-	<string name="dialog_file_details_title">屬性</string>	
-	<string name="dialog_file_delete_title">確認</string>
-	<string name="dialog_file_delete_message">你確定要刪除 %1$s 嗎？</string>	
-	<string name="dialog_thanks_to_title">致謝</string>
-	<string name="dialog_thanks_to_message">
-本軟件由 楊輝 &lt;yanghui1986527@gmail.com&gt; 進行開發和維護，其中包含的圖標集由 Matthieu James &lt;matthieu.james@gmail.com&gt; 開發。\n\n
 
-感謝以下人員對我的支持和幫助。\n\n
+    <string name="app_name">HD檔案管理器</string>
+    <string name="emptydir">該資料夾為空</string>
+    <string name="button_text_yes">確定</string>
+    <string name="button_text_no">取消</string>
+    <string name="toast_exit_tips">再按一次退出程序</string>
+    <string name="dialog_create_folder_title">新建資料夾</string>
+    <string name="dialog_file_rename_title">重命名</string>
+    <string name="dialog_file_details_title">屬性</string>
+    <string name="dialog_file_delete_title">確認</string>
+    <string name="dialog_file_delete_message">你確定要刪除 %1$s 嗎？</string>
+    <string name="dialog_thanks_to_title">致謝</string>
+    <string name="dialog_thanks_to_message">本軟件由 楊輝 &lt;yanghui1986527@gmail.com> 進行開發和維護，其中包含的圖標集由 Matthieu James &lt;matthieu.james@gmail.com> 開發。\n\n
 
-<b>開發者</b>\n
-蔣金峰，Matthieu James\n\n
+感謝以下人員對我的支持和幫助。\n\n<b>開發者</b>n
+蔣金峰，Matthieu James\n\n<b>翻譯者</b>n
+楊歡\n\n<b>測試者</b>n
+楊婷，胡大蘭，付錢娟，蔣金峰，辛華勝，魏子雄，羅成</string>
+    <string name="menu_newfolder_title">新建資料夾</string>
+    <string name="menu_settings_title">設置</string>
+    <string name="menu_open_title">打開</string>
+    <string name="menu_openwith_title">打開方式</string>
+    <string name="menu_copy_title">複製</string>
+    <string name="menu_cut_title">剪切</string>
+    <string name="menu_paste_title">黏貼</string>
+    <string name="menu_rename_title">重命名</string>
+    <string name="menu_delete_title">刪除</string>
+    <string name="menu_attribute_title">屬性</string>
+    <string name="dialog_attribute_file_name">名稱</string>
+    <string name="dialog_attribute_file_size">大小</string>
+    <string name="dialog_attribute_file_lastmodified">最後修改時間</string>
+    <string name="preference_category_settings_title">常規設置</string>
+    <string name="preference_showhidden_title">顯示隱藏文件</string>
+    <string name="preference_showhidden_key">showhidden</string>
+    <string name="preference_showhidden_summary">是否顯示文件名以"."開頭的文件</string>
+    <string name="preference_showhidden_default_value">false</string>
+    <string name="preference_category_about_title">關於</string>
+    <string name="preference_help_title">幫助</string>
+    <string name="preference_help_summary">在這裡查找 HD文件管理器 相關問題的答案</string>
+    <string name="preference_help_intent_data">http://code.google.com/p/hdexplorer/w/list</string>
+    <string name="preference_feedback_title">反饋</string>
+    <string name="preference_feedback_summary">幫助我們改進 HD文件管理器 的服務</string>
+    <string name="preference_feedback_intent_data">ttp://code.google.com/p/hdexplorer/issues/list</string>
+    <string name="preference_thanks_key">thanksto</string>
+    <string name="preference_thanks_title">致謝</string>
+    <string name="preference_thanks_summary">感謝各位對我的支持和幫助</string>
+    <string name="preference_licenses_title">開放源代碼許可</string>
+    <string name="preference_licenses_summary">開放源代碼軟件的許可詳情</string>
+    <string name="preference_licenses_intent_data">ttp://code.google.com/p/hdexplorer/wiki/License</string>
+    <string name="preference_version_title">應用程序版本</string>
+    <string name="preference_version_summary">0.1.3</string>
+    <string name="MY_AD_UNIT_ID">a14edf7f7b7136a</string>
+    <string name="TEST_DEVICE_ID">HT07GL900363</string>
 
-<b>翻譯者</b>\n
-楊歡\n\n
-
-<b>測試者</b>\n
-楊婷，胡大蘭，付錢娟，蔣金峰，辛華勝，魏子雄，羅成
-	</string>					
-	<string name="menu_newfolder_title">新建資料夾</string>
-	<string name="menu_settings_title">設置</string>
-	<string name="menu_open_title">打開</string>
-	<string name="menu_openwith_title">打開方式</string>
-	<string name="menu_copy_title">複製</string>
-	<string name="menu_cut_title">剪切</string>
-	<string name="menu_paste_title">黏貼</string>
-	<string name="menu_rename_title">重命名</string>
-	<string name="menu_delete_title">刪除</string>
-	<string name="menu_attribute_title">屬性</string>
-	<string name="dialog_attribute_file_name">名稱</string>
-	<string name="dialog_attribute_file_size">大小</string>
-	<string name="dialog_attribute_file_lastmodified">最後修改時間</string>
-	<string name="preference_category_settings_title">常規設置</string>
-	<string name="preference_showhidden_title">顯示隱藏文件</string>
-	<string name="preference_showhidden_key">showhidden</string>
-	<string name="preference_showhidden_summary">是否顯示文件名以"."開頭的文件</string>
-	<string name="preference_showhidden_default_value">false</string>
-	<string name="preference_category_about_title">關於</string>
-	<string name="preference_help_title">幫助</string>
-	<string name="preference_help_summary">在這裡查找 HD文件管理器 相關問題的答案</string>
-	<string name="preference_help_intent_data">http://code.google.com/p/hdexplorer/w/list</string>
-	<string name="preference_feedback_title">反饋</string>
-	<string name="preference_feedback_summary">幫助我們改進 HD文件管理器 的服務</string>
-	<string name="preference_feedback_intent_data">http://code.google.com/p/hdexplorer/issues/list
-	</string>
-	<string name="preference_thanks_key">thanksto</string>
-	<string name="preference_thanks_title">致謝</string>
-	<string name="preference_thanks_summary">感謝各位對我的支持和幫助</string>
-	<string name="preference_licenses_title">開放源代碼許可</string>
-	<string name="preference_licenses_summary">開放源代碼軟件的許可詳情</string>
-	<string name="preference_licenses_intent_data">http://code.google.com/p/hdexplorer/wiki/License
-	</string>		
-	<string name="preference_version_title">應用程序版本</string>
-	<string name="preference_version_summary">0.1.3</string>
-	<string name="MY_AD_UNIT_ID">a14edf7f7b7136a</string>
-	<string name="TEST_DEVICE_ID">HT07GL900363</string>
 </resources>
