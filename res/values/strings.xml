@@ -6,7 +6,8 @@
 	<string name="button_text_yes">Yes</string>
 	<string name="button_text_no">No</string>
 	<string name="toast_exit_tips">Press back again to exit.</string>
-	<string name="dialog_create_folder_title">Create a folder</string>
+	<string name="toast_warn_scard_ejected">Sdcard Ejected.</string>
+		<string name="dialog_create_folder_title">Create a folder</string>
 	<string name="dialog_file_rename_title">Rename</string>
 	<string name="dialog_file_details_title">Attribute</string>
 	<string name="dialog_file_delete_title">Confirm</string>
@@ -66,6 +67,6 @@ yang ting,hu dalan,fu qianjuan,jiang jinfeng,xin huasheng,wei zixiong,luo cheng
 	<string name="preference_version_title">Application version</string>
 	<string name="preference_version_summary">0.1.3</string>
 	<string name="MY_AD_UNIT_ID">a14edf7f7b7136a</string>
-	<string name="TEST_DEVICE_ID">HT07GL900363</string>
+	<string name="TEST_DEVICE_ID">0123456789ABCDEF</string>
 
 </resources>

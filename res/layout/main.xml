@@ -228,8 +228,7 @@
             android:id="@+id/adView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            ads:adSize="BANNER"
+            ads:adSize="SMART_BANNER"
             ads:adUnitId="@string/MY_AD_UNIT_ID"
             ads:loadAdOnCreate="true"
             ads:testDevices="@string/TEST_DEVICE_ID" />

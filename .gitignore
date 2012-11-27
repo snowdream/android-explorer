@@ -1,6 +1,7 @@
 #Ignore the Dirs
 gen
 bin
+raw
 .metadata
 
 #Ignore the Files
