@@ -66,12 +66,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdView;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.hd.Constant;
 import com.hd.explorer.broadcastreceiver.SystemBroadCastReceiver;
-import com.hd.explorer.interfaces.IListener;
 import com.hd.explorer.interfaces.ISDCardListener;
 
 /**

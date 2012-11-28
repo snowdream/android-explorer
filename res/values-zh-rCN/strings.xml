@@ -43,13 +43,13 @@
     <string name="preference_help_intent_data">http://code.google.com/p/hdexplorer/w/list</string>
     <string name="preference_feedback_title">反馈</string>
     <string name="preference_feedback_summary">帮助我们改进 HD文件管理器 的服务</string>
-    <string name="preference_feedback_intent_data">ttp://code.google.com/p/hdexplorer/issues/list</string>
+    <string name="preference_feedback_intent_data">http://code.google.com/p/hdexplorer/issues/list</string>
     <string name="preference_thanks_key">thanksto</string>
     <string name="preference_thanks_title">致谢</string>
     <string name="preference_thanks_summary">感谢各位对我的支持和帮助</string>
     <string name="preference_licenses_title">开放源代码许可</string>
     <string name="preference_licenses_summary">开放源代码软件的许可详情</string>
-    <string name="preference_licenses_intent_data">ttp://code.google.com/p/hdexplorer/wiki/License</string>
+    <string name="preference_licenses_intent_data">http://code.google.com/p/hdexplorer/wiki/License</string>
     <string name="preference_version_title">应用程序版本</string>
     <string name="preference_version_summary">0.1.3</string>
     <string name="MY_AD_UNIT_ID">a14edf7f7b7136a</string>
