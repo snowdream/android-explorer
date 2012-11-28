@@ -68,6 +68,7 @@ import android.widget.Toast;
 
 import com.google.ads.AdRequest;
 import com.google.ads.AdView;
+import com.google.analytics.tracking.android.EasyTracker;
 import com.hd.Constant;
 import com.hd.explorer.broadcastreceiver.SystemBroadCastReceiver;
 import com.hd.explorer.interfaces.IListener;
@@ -894,7 +895,7 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener,
     protected void onStart() {
         Log.i(TAG,"onStart");
         super.onStart();
-
+        EasyTracker.getInstance().activityStart(this); // Add this method.
     }
 
     /**
@@ -909,7 +910,7 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener,
     protected void onStop() {
         Log.i(TAG,"onStop");
         super.onStop();
-
+        EasyTracker.getInstance().activityStop(this); // Add this method.
     }
 
     /**
