@@ -1336,7 +1336,7 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener,
     @Override
     public void onSDCardEject() {
         deleteAllItems();
-        Toast.makeText(this, R.string.toast_warn_scard_ejected, Toast.LENGTH_SHORT);
+        Toast.makeText(this, R.string.toast_warn_scard_ejected, Toast.LENGTH_SHORT).show();
     }
 
     /* (non-Javadoc)
