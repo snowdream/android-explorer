@@ -14,106 +14,38 @@
  * limitations under the License.
  */
 
+
+
 buildscript {
     repositories {
         mavenCentral()
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:0.7.3+'
     }
 }
-apply plugin: 'android'
 
-dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
-}
+allprojects {
+    version = POM_VERSION
 
-android {
-    compileSdkVersion Integer.parseInt(project.COMPILE_SDK_VERSION)
-    buildToolsVersion project.BUILD_TOOLS_VERSION
-
-    defaultConfig {
-        versionCode  Integer.parseInt(project.VERSION_CODE)
-        versionName  project.VERSION_NAME
-        minSdkVersion Integer.parseInt(project.MIN_SDK_VERSION)
-        targetSdkVersion Integer.parseInt(project.TARGET_SDK_VERSION)
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "file:///home/snowdream/workspace/git/mvn-repo/releases/" }
+        maven { url "file:///home/snowdream/workspace/git/mvn-repo/snapshots/" }
+        maven { url "http://snowdream.github.io/mvn-repo/releases/" }
+        maven { url "http://snowdream.github.io/mvn-repo/snapshots/" }
     }
 
-    signingConfigs {
-        release {
-            storeFile file(System.getenv("KEYSTORE"))
-            storePassword System.getenv("KEYSTORE_PASSWORD")
-            keyAlias System.getenv("KEY_ALIAS")
-            keyPassword System.getenv("KEY_PASSWORD")
-        }
-    }
-
-    buildTypes {
-        release {
-            signingConfig signingConfigs.release
-        }
-    }
-
-    packagingOptions {
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-    }
-
-    sourceSets {
-        main {
-            manifest.srcFile 'AndroidManifest.xml'
-            java.srcDirs = ['src']
-            resources.srcDirs = ['src']
-            aidl.srcDirs = ['src']
-            renderscript.srcDirs = ['src']
-            res.srcDirs = ['res']
-            assets.srcDirs = ['assets']
-        }
-
-        // Move the tests to tests/java, tests/res, etc...
-        instrumentTest.setRoot('tests')
-
-        // Move the build types to build-types/<type>
-        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
-        // This moves them out of them default location under src/<type>/... which would
-        // conflict with src/ being used by the main source set.
-        // Adding new build types or product flavors should be accompanied
-        // by a similar customization.
-        debug.setRoot('build-types/debug')
-        release.setRoot('build-types/release')
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
     }
 }
 
-android.applicationVariants.all { variant ->
-    def apk = variant.packageApplication.outputFile;
-    def newName = "";
 
-    newName = apk.name.replace(project.name,POM_NAME + "-v" + android.defaultConfig.versionName);
-    newName = newName.replace("-" + variant.buildType.name, "");
-    newName = newName.replace(".apk", "-" + variant.buildType.name.toLowerCase() + ".apk");
-
-    variant.packageApplication.outputFile = new File(apk.parentFile, newName);
-    if (variant.zipAlign) {
-        variant.zipAlign.outputFile = new File(apk.parentFile, newName.replace("-unaligned", ""));
-    }
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.9'
 }
 
-android.applicationVariants.all { variant ->
-
-    task("generate${variant.name}Javadoc", type: Javadoc) {
-        title = "android lib - downloader $version API"
-        description "Generates Javadoc for $variant.name."
-        source = variant.javaCompile.source
-        ext.androidJar =
-                "${android.plugin.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
-        classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
-        options.links("http://docs.oracle.com/javase/7/docs/api/");
-        options.linksOffline("http://d.android.com/reference","${android.plugin.sdkDirectory}/docs/reference");
-        exclude '**/BuildConfig.java'
-        exclude '**/R.java'
-        exclude '**/Log2File.java'
-    }
-}
