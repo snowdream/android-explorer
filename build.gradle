@@ -32,6 +32,7 @@ allprojects {
     repositories {
         mavenLocal()
         mavenCentral()
+        maven { url System.getProperty("user.home") + "/.m2/repository" }
         maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "file:///home/snowdream/workspace/git/mvn-repo/releases/" }
         maven { url "file:///home/snowdream/workspace/git/mvn-repo/snapshots/" }

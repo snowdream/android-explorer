@@ -17,10 +17,13 @@
 apply plugin: 'android'
 
 dependencies {
-    compile 'com.android.support:support-v4:+'
-    compile files('libs/libGoogleAnalyticsV2.jar')
-    compile files('libs/GoogleAdMobAdsSdk-6.2.1.jar')
+//compile 'com.android.support:support-v4:+'
+compile files('libs/libGoogleAnalyticsV2.jar')
+compile files('libs/GoogleAdMobAdsSdk-6.2.1.jar')
+compile 'com.github.snowdream.android.app:updater:1.0@aar'
+compile 'com.github.snowdream.android.util:log:1.0.4'
 }
+
 android {
     compileSdkVersion Integer.parseInt(project.COMPILE_SDK_VERSION)
     buildToolsVersion project.BUILD_TOOLS_VERSION
@@ -31,7 +34,6 @@ android {
         minSdkVersion Integer.parseInt(project.MIN_SDK_VERSION)
         targetSdkVersion Integer.parseInt(project.TARGET_SDK_VERSION)
     }
-
     signingConfigs {
         release {
             storeFile file(System.getenv("KEYSTORE"))
@@ -40,13 +42,11 @@ android {
             keyPassword System.getenv("KEY_PASSWORD")
         }
     }
-
     buildTypes {
         release {
             signingConfig signingConfigs.release
         }
     }
-
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/NOTICE'

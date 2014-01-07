@@ -18,20 +18,6 @@
 
 package com.hd.explorer;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -66,10 +52,29 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.snowdream.android.app.UpdateFormat;
+import com.github.snowdream.android.app.UpdateManager;
+import com.github.snowdream.android.app.UpdateOptions;
+import com.github.snowdream.android.app.DefaultUpdateListener;
+import com.github.snowdream.android.app.UpdatePeriod;
 import com.google.analytics.tracking.android.EasyTracker;
 import com.hd.Constant;
 import com.hd.explorer.broadcastreceiver.SystemBroadCastReceiver;
 import com.hd.explorer.interfaces.ISDCardListener;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 
@@ -193,6 +198,27 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener,
         if(file != null){
             open(file,false);
         }
+
+        com.github.snowdream.android.util.Log.setEnabled(true);
+
+        //Update
+//        UpdateManager manager = new UpdateManager(this);
+//
+//        UpdateOptions options = new UpdateOptions.Builder(this)
+//                .checkUrl("https://raw.github.com/snowdream/android-autoupdate/master/docs/test/updateinfo.xml")
+//                .updateFormat(UpdateFormat.XML)
+//                .updatePeriod(new UpdatePeriod(UpdatePeriod.EACH_TIME))
+//                .checkPackageName(true)
+//                .build();
+//
+//        UpdateOptions options = new UpdateOptions.Builder(this)
+//                .checkUrl("https://raw.github.com/snowdream/android-autoupdate/master/docs/test/updateinfo.json")
+//                .updateFormat(UpdateFormat.JSON)
+//                .updatePeriod(new UpdatePeriod(UpdatePeriod.EACH_TIME))
+//                .checkPackageName(true)
+//                .build();
+
+//        manager.check(this, options);
     }
 
 
