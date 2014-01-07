@@ -65,7 +65,7 @@ yang ting,hu dalan,fu qianjuan,jiang jinfeng,xin huasheng,wei zixiong,luo cheng
 	<string name="preference_licenses_intent_data">http://code.google.com/p/hdexplorer/wiki/License
 	</string>
 	<string name="preference_version_title">Application version</string>
-	<string name="preference_version_summary">0.1.3</string>
+	<string name="preference_version_summary">0.1.6</string>
 	<string name="MY_AD_UNIT_ID">a14edf7f7b7136a</string>
 	<string name="TEST_DEVICE_ID">0123456789ABCDEF</string>
 
