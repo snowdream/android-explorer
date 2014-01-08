@@ -202,14 +202,14 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener,
         com.github.snowdream.android.util.Log.setEnabled(true);
 
         //Update
-//        UpdateManager manager = new UpdateManager(this);
-//
-//        UpdateOptions options = new UpdateOptions.Builder(this)
-//                .checkUrl("https://raw.github.com/snowdream/android-autoupdate/master/docs/test/updateinfo.xml")
-//                .updateFormat(UpdateFormat.XML)
-//                .updatePeriod(new UpdatePeriod(UpdatePeriod.EACH_TIME))
-//                .checkPackageName(true)
-//                .build();
+        UpdateManager manager = new UpdateManager(this);
+
+        UpdateOptions options = new UpdateOptions.Builder(this)
+                .checkUrl("https://raw.github.com/snowdream/android-autoupdate/master/docs/test/updateinfo.xml")
+                .updateFormat(UpdateFormat.XML)
+                .updatePeriod(new UpdatePeriod(UpdatePeriod.EACH_TIME))
+                .checkPackageName(true)
+                .build();
 //
 //        UpdateOptions options = new UpdateOptions.Builder(this)
 //                .checkUrl("https://raw.github.com/snowdream/android-autoupdate/master/docs/test/updateinfo.json")
@@ -218,7 +218,7 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener,
 //                .checkPackageName(true)
 //                .build();
 
-//        manager.check(this, options);
+        manager.check(this, options);
     }
 
 

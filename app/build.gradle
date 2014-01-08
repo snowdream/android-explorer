@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
+
 apply plugin: 'android'
 
 dependencies {
 //compile 'com.android.support:support-v4:+'
-compile files('libs/libGoogleAnalyticsV2.jar')
-compile files('libs/GoogleAdMobAdsSdk-6.2.1.jar')
-compile 'com.github.snowdream.android.app:updater:1.0@aar'
-compile 'com.github.snowdream.android.util:log:1.0.4'
+    compile 'com.google.android.analytics:analytics:3.0.0'
+    compile 'com.google.android.admob:admob:6.4.1-r11'
+    compile 'com.github.snowdream.android.app:updater:1.0@aar'
+    compile 'com.github.snowdream.android.util:log:1.0.4'
 }
 
 android {
@@ -29,8 +29,8 @@ android {
     buildToolsVersion project.BUILD_TOOLS_VERSION
 
     defaultConfig {
-        versionCode  Integer.parseInt(project.VERSION_CODE)
-        versionName  project.VERSION_NAME
+        versionCode Integer.parseInt(project.VERSION_CODE)
+        versionName project.VERSION_NAME
         minSdkVersion Integer.parseInt(project.MIN_SDK_VERSION)
         targetSdkVersion Integer.parseInt(project.TARGET_SDK_VERSION)
     }
@@ -60,7 +60,7 @@ android.applicationVariants.all { variant ->
     def apk = variant.packageApplication.outputFile;
     def newName = "";
 
-    newName = apk.name.replace(project.name,POM_NAME + "-v" + android.defaultConfig.versionName);
+    newName = apk.name.replace(project.name, POM_NAME + "-v" + android.defaultConfig.versionName);
     newName = newName.replace("-" + variant.buildType.name, "");
     newName = newName.replace(".apk", "-" + variant.buildType.name.toLowerCase() + ".apk");
 
@@ -80,7 +80,7 @@ android.applicationVariants.all { variant ->
                 "${android.plugin.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
         classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
         options.links("http://docs.oracle.com/javase/7/docs/api/");
-        options.linksOffline("http://d.android.com/reference","${android.plugin.sdkDirectory}/docs/reference");
+        options.linksOffline("http://d.android.com/reference", "${android.plugin.sdkDirectory}/docs/reference");
         exclude '**/BuildConfig.java'
         exclude '**/R.java'
         exclude '**/Log2File.java'
