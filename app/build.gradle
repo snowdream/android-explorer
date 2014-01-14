@@ -14,74 +14,17 @@
  * limitations under the License.
  */
 
-apply plugin: 'android'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply from: '../config/android.gradle'
+//apply from: '../config/sign.gradle'
+//apply from: '../config/maven_push.gradle'
 
 dependencies {
     compile project(':update')
     compile 'com.google.android.analytics:analytics:3.0.0'
     compile 'com.google.android.admob:admob:6.4.1-r11'
     compile 'com.github.snowdream.android.util:log:1.0.4'
-}
-
-android {
-    compileSdkVersion Integer.parseInt(project.COMPILE_SDK_VERSION)
-    buildToolsVersion project.BUILD_TOOLS_VERSION
-
-    defaultConfig {
-        versionCode Integer.parseInt(project.VERSION_CODE)
-        versionName project.VERSION_NAME
-        minSdkVersion Integer.parseInt(project.MIN_SDK_VERSION)
-        targetSdkVersion Integer.parseInt(project.TARGET_SDK_VERSION)
-    }
-    signingConfigs {
-        release {
-            storeFile file(System.getenv("KEYSTORE"))
-            storePassword System.getenv("KEYSTORE_PASSWORD")
-            keyAlias System.getenv("KEY_ALIAS")
-            keyPassword System.getenv("KEY_PASSWORD")
-        }
-    }
-    buildTypes {
-        release {
-            signingConfig signingConfigs.release
-        }
-    }
-    packagingOptions {
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-    }
-}
-
-android.applicationVariants.all { variant ->
-    def apk = variant.packageApplication.outputFile;
-    def newName = "";
-
-    newName = apk.name.replace(project.name, POM_NAME + "-v" + android.defaultConfig.versionName);
-    newName = newName.replace("-" + variant.buildType.name, "");
-    newName = newName.replace(".apk", "-" + variant.buildType.name.toLowerCase() + ".apk");
-
-    variant.packageApplication.outputFile = new File(apk.parentFile, newName);
-    if (variant.zipAlign) {
-        variant.zipAlign.outputFile = new File(apk.parentFile, newName.replace("-unaligned", ""));
-    }
-}
-
-android.applicationVariants.all { variant ->
-
-    task("generate${variant.name}Javadoc", type: Javadoc) {
-        title = "android lib - downloader $version API"
-        description "Generates Javadoc for $variant.name."
-        source = variant.javaCompile.source
-        ext.androidJar =
-                "${android.plugin.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
-        classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
-        options.links("http://docs.oracle.com/javase/7/docs/api/");
-        options.linksOffline("http://d.android.com/reference", "${android.plugin.sdkDirectory}/docs/reference");
-        exclude '**/BuildConfig.java'
-        exclude '**/R.java'
-        exclude '**/Log2File.java'
-    }
+    compile "com.android.support:support-v4:18.0.+"
+    compile 'com.android.support:appcompat-v7:18.0.+'
 }
