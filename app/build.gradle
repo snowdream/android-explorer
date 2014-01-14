@@ -25,6 +25,6 @@ dependencies {
     compile 'com.google.android.analytics:analytics:3.0.0'
     compile 'com.google.android.admob:admob:6.4.1-r11'
     compile 'com.github.snowdream.android.util:log:1.0.4'
-    compile "com.android.support:support-v4:18.0.+"
-    compile 'com.android.support:appcompat-v7:18.0.+'
+    compile "com.android.support:support-v4:19.0.1+"
+    compile 'com.android.support:appcompat-v7:19.0.1+'
 }
