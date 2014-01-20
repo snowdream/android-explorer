@@ -218,7 +218,22 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener,
 //                .checkPackageName(true)
 //                .build();
 
-        manager.check(this, options);
+        manager.check(this, options,new DefaultUpdateListener(){
+            @Override
+            public void onStart() {
+                //super.onStart();
+            }
+
+            @Override
+            public void onShowNoUpdateUI() {
+                //super.onShowNoUpdateUI();
+            }
+
+            @Override
+            public void onFinish() {
+                //super.onFinish();
+            }
+        });
     }
 
 
