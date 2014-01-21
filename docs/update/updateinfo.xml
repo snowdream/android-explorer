@@ -3,8 +3,8 @@
     <appName>android-explorer</appName>
     <appDescription>android-explorer</appDescription>
     <packageName>com.github.snowdream.android.apps.autoupdater</packageName>
-    <versionCode>2</versionCode>
-    <versionName>2.0</versionName>
+    <versionCode>10</versionCode>
+    <versionName>10.0</versionName>
     <forceUpdate>false</forceUpdate>
     <autoUpdate>false</autoUpdate>
     <apkUrl>https://raw.github.com/snowdream/android-autoupdate/master/docs/test/android-autoupdater-v2.0-release.apk</apkUrl>
