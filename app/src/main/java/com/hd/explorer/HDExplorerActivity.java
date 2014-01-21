@@ -205,10 +205,10 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener,
         UpdateManager manager = new UpdateManager(this);
 
         UpdateOptions options = new UpdateOptions.Builder(this)
-                .checkUrl("https://raw.github.com/snowdream/android-autoupdate/master/docs/test/updateinfo.xml")
+                .checkUrl("https://raw.github.com/snowdream/android-explorer/master/docs/update/updateinfo.xml")
                 .updateFormat(UpdateFormat.XML)
                 .updatePeriod(new UpdatePeriod(UpdatePeriod.EACH_TIME))
-                .checkPackageName(true)
+                .checkPackageName(false)
                 .build();
 //
 //        UpdateOptions options = new UpdateOptions.Builder(this)

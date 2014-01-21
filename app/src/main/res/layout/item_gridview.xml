@@ -8,9 +8,11 @@
 
     <ImageView
         android:id="@+id/gridview_fileicon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
+        android:layout_margin="2dp"
+        android:scaleType="centerInside"
         android:contentDescription="@string/app_name" />
 
     <TextView
