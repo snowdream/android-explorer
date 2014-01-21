@@ -2,9 +2,9 @@
 <updateInfo>
     <appName>android-explorer</appName>
     <appDescription>android-explorer</appDescription>
-    <packageName>com.github.snowdream.android.apps.autoupdater</packageName>
-    <versionCode>10</versionCode>
-    <versionName>10.0</versionName>
+    <packageName>com.hd.explorer</packageName>
+    <versionCode>8</versionCode>
+    <versionName>0.1.16</versionName>
     <forceUpdate>false</forceUpdate>
     <autoUpdate>false</autoUpdate>
     <apkUrl>https://github.com/snowdream/android-explorer/releases/download/v0.1.16/explorer-v0.1.16-release.apk</apkUrl>
