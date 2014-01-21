@@ -3,7 +3,7 @@
     <appName>android-explorer</appName>
     <appDescription>android-explorer</appDescription>
     <packageName>com.github.snowdream.android.apps.autoupdater</packageName>
-    <versionCode>10</versionCode>
+    <versionCode>2</versionCode>
     <versionName>10.0</versionName>
     <forceUpdate>false</forceUpdate>
     <autoUpdate>false</autoUpdate>
