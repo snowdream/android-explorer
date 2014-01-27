@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013 Snowdream Mobile <yanghui1986527@gmail.com>
+ * Copyright (C) 2014 Snowdream Mobile <yanghui1986527@gmail.com>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,17 +20,18 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.7.3+'
+        classpath 'com.android.tools.build:gradle:0.8.0+'
     }
 }
 
 allprojects {
+    groupId = POM_GROUP_ID
+    artifactId = POM_ARTIFACT_ID
     version = POM_VERSION
 
     repositories {
         mavenLocal()
         mavenCentral()
-        maven { url System.getProperty("user.home") + "/.m2/repository" }
         maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "file:///home/snowdream/workspace/git/mvn-repo/releases/" }
         maven { url "file:///home/snowdream/workspace/git/mvn-repo/snapshots/" }
@@ -45,6 +46,6 @@ allprojects {
 
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.9'
+    gradleVersion = '1.10'
 }
 
