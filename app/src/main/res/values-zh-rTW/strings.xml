@@ -51,7 +51,7 @@
     <string name="preference_licenses_summary">開放源代碼軟件的許可詳情</string>
     <string name="preference_licenses_intent_data">http://code.google.com/p/hdexplorer/wiki/License</string>
     <string name="preference_version_title">應用程序版本</string>
-    <string name="preference_version_summary">0.1.16</string>
+    <string name="preference_version_summary">0.1.20</string>
     <string name="MY_AD_UNIT_ID">a152e719a22fcae</string>
     <string name="TEST_DEVICE_ID">0123456789ABCDEF</string>
 
