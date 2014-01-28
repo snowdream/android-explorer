@@ -18,7 +18,7 @@ import java.io.File;
 /**
  * Created by yanghui07 on 14-1-16.
  */
-public class HDApplication extends Application {
+public class MainApplication extends Application {
     /**
      * Called when the application is starting, before any activity, service,
      * or receiver objects (excluding content providers) have been created.

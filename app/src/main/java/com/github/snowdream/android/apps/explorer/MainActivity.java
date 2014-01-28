@@ -53,7 +53,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * ClassName:HDExplorerActivity
+ * ClassName:MainActivity
  * Reason:	 The Main Activity of The Explorer
  *
  * @author yang hui
@@ -61,7 +61,7 @@ import java.util.List;
  * @see
  * @since Ver 1.1
  */
-public class HDExplorerActivity extends Activity implements OnItemClickListener, ISDCardListener {
+public class MainActivity extends Activity implements OnItemClickListener, ISDCardListener {
 
     private static final String TAG = "HDExplorer";
     //Boolean Flags
@@ -1279,7 +1279,7 @@ public class HDExplorerActivity extends Activity implements OnItemClickListener,
                 showDialog(FOLDER_CREATE);
                 return true;
             case R.id.settings:
-                startActivityForResult(new Intent(HDExplorerActivity.this, HDPreferenceActivity.class), REQ_SYSTEM_SETTINGS);
+                startActivityForResult(new Intent(MainActivity.this, HDPreferenceActivity.class), REQ_SYSTEM_SETTINGS);
                 return true;
             default:
                 break;
