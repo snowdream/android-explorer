@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<string name="app_name">HDExplorer</string>
+	<string name="app_name">Snowdream File Explorer</string>
 	<string name="emptydir">The directory is empty.</string>
 	<string name="button_text_yes">Yes</string>
 	<string name="button_text_no">No</string>

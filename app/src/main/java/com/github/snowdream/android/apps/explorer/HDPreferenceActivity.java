@@ -16,7 +16,7 @@
  * Boston, MA 021110-1307, USA.
  */
 
-package com.hd.explorer;
+package com.github.snowdream.android.apps.explorer;
 
 
 import android.app.AlertDialog;
@@ -34,11 +34,10 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.util.Log;
 import android.view.WindowManager;
-
 import com.google.analytics.tracking.android.EasyTracker;
 
 public class HDPreferenceActivity extends PreferenceActivity implements
-OnPreferenceChangeListener, OnPreferenceClickListener {
+        OnPreferenceChangeListener, OnPreferenceClickListener {
 
     private static final String TAG = "HDSettings";
 
@@ -55,29 +54,29 @@ OnPreferenceChangeListener, OnPreferenceClickListener {
     /**
      * <b>onCreate</b><br/>
      * HDRecorderSettingsActivity activity创建时首先调用该方法
-     * 
-     * @param   savedInstanceState 用于保存数据
-     * @return    无
-     * @exception   无
-     */		
+     *
+     * @param savedInstanceState 用于保存数据
+     * @return 无
+     * @throws 无
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //从xml文件中添加Preference项
-        addPreferencesFromResource(R.xml.settings);	
+        addPreferencesFromResource(R.xml.settings);
 
-        if(/*misFullScreen*/true){
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,   
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN);  
+        if (/*misFullScreen*/true) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
         }
 
-        key_showhidden = getResources().getString(R.string.preference_showhidden_key);  
+        key_showhidden = getResources().getString(R.string.preference_showhidden_key);
         default_value_showhidden = Boolean.parseBoolean(getResources().getString(R.string.preference_showhidden_default_value));
 
         check_showhidden = (CheckBoxPreference) findPreference(key_showhidden);
         check_showhidden.setOnPreferenceChangeListener(this);
 
-        key_thanksto = getResources().getString(R.string.preference_thanks_key); 
+        key_thanksto = getResources().getString(R.string.preference_thanks_key);
         screen_thanksto = (PreferenceScreen) findPreference(key_thanksto);
         screen_thanksto.setOnPreferenceClickListener(this);
 
@@ -90,11 +89,11 @@ OnPreferenceChangeListener, OnPreferenceClickListener {
 
     /**
      * <b>onDestroy</b><br/>
-     *  onDestroy<br/>
-     *  
-     * @param   无
-     * @return   无
-     */	
+     * onDestroy<br/>
+     *
+     * @param 无
+     * @return 无
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -102,49 +101,46 @@ OnPreferenceChangeListener, OnPreferenceClickListener {
 
 
     /**
-     * 
      * onStart: onStart
      *
-     * @param      
-     * @return     
-     * @throws 
+     * @param
+     * @return
+     * @throws
      */
     @Override
     protected void onStart() {
-        Log.i(TAG,"onStart");
+        Log.i(TAG, "onStart");
         super.onStart();
         EasyTracker.getInstance().activityStart(this); // Add this method.
     }
 
     /**
-     * 
      * onStop: onStop
      *
-     * @param      
-     * @return     
-     * @throws 
+     * @param
+     * @return
+     * @throws
      */
     @Override
     protected void onStop() {
-        Log.i(TAG,"onStop");
+        Log.i(TAG, "onStop");
         super.onStop();
         EasyTracker.getInstance().activityStop(this); // Add this method.
     }
 
 
-
     /**
      * <b>onPreferenceClick</b><br/>
-     *  当Preference项被点击时响应事件<br/>
-     *  
-     * @param   preference Preference
-     * @return  true，表示已经处理；false，表示未处理。
-     */	
+     * 当Preference项被点击时响应事件<br/>
+     *
+     * @param preference Preference
+     * @return true，表示已经处理；false，表示未处理。
+     */
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        Log.i(TAG,"onPreferenceClick");
+        Log.i(TAG, "onPreferenceClick");
 
-        if(preference == screen_thanksto){
+        if (preference == screen_thanksto) {
             showDialog(DIALOG_THANKS_TO);
             return true;
         }
@@ -152,17 +148,16 @@ OnPreferenceChangeListener, OnPreferenceClickListener {
     }
 
 
-
     /**
      * <b>onCreateDialog</b><br/>
-     *  创建对话框<br/>
-     *  
-     * @param   id 对话框id
-     * @return  Dialog，创建的对话框窗口
-     */	
+     * 创建对话框<br/>
+     *
+     * @param id 对话框id
+     * @return Dialog，创建的对话框窗口
+     */
     @Override
     protected Dialog onCreateDialog(int id) {
-        Log.i(TAG,"onCreateDialog");
+        Log.i(TAG, "onCreateDialog");
         switch (id) {
             case DIALOG_THANKS_TO:
                 AlertDialog.Builder mthankstoDialog = new AlertDialog.Builder(this);
@@ -173,7 +168,7 @@ OnPreferenceChangeListener, OnPreferenceClickListener {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();		
+                        dialog.cancel();
                     }
                 });
                 return mthankstoDialog.create();
@@ -185,19 +180,19 @@ OnPreferenceChangeListener, OnPreferenceClickListener {
 
     /**
      * <b>onPreferenceChange</b><br/>
-     *  当Preference的值发生改变时，响应事件，保存修改后的值。<br/>
-     *  
-     * @param   preference Preference
-     * @param   newValue 修改后的值
-     * @return  true，表示已经处理；false，表示未处理。
-     */	
+     * 当Preference的值发生改变时，响应事件，保存修改后的值。<br/>
+     *
+     * @param preference Preference
+     * @param newValue   修改后的值
+     * @return true，表示已经处理；false，表示未处理。
+     */
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         SharedPreferences settings = getPreferenceManager().getSharedPreferences();
         Editor edit = settings.edit();
 
-        if(preference == check_showhidden){
-            edit.putBoolean(key_showhidden,  (Boolean)newValue);
+        if (preference == check_showhidden) {
+            edit.putBoolean(key_showhidden, (Boolean) newValue);
         }
         edit.commit();
         return true;
@@ -205,11 +200,11 @@ OnPreferenceChangeListener, OnPreferenceClickListener {
 
     /**
      * <b>onConfigurationChanged</b><br/>
-     *  屏幕旋转时，触发该响应<br/>
-     *  
-     * @param   newConfig 屏幕配置信息
-     * @return   无
-     */	
+     * 屏幕旋转时，触发该响应<br/>
+     *
+     * @param newConfig 屏幕配置信息
+     * @return 无
+     */
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
 

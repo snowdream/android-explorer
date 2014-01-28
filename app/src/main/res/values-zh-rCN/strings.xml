@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">HD文件管理器</string>
+    <string name="app_name">雪梦文件管理器</string>
     <string name="emptydir">该文件夹为空</string>
     <string name="button_text_yes">确定</string>
     <string name="button_text_no">取消</string>

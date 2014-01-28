@@ -16,19 +16,7 @@
  * Boston, MA 021110-1307, USA.
  */
 
-package com.hd.explorer;
-
-import java.io.File;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import com.hd.Constant;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+package com.github.snowdream.android.apps.explorer;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -45,6 +33,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+
+import java.io.File;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 /**
  * ClassName:HDBaseAdapter
@@ -154,7 +152,7 @@ public class HDBaseAdapter extends BaseAdapter {
                                     .toString();
 
                             imageLoader.displayImage(imageUri, mListHolder.mfileIcon, options, null);
-                        }else{
+                        } else {
                             mListHolder.mfileIcon.setImageResource(icon);
                         }
                     }
