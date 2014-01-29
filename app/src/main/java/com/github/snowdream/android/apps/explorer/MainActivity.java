@@ -18,7 +18,6 @@
 
 package com.github.snowdream.android.apps.explorer;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -32,6 +31,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.*;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -39,7 +40,6 @@ import android.widget.*;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
 import com.github.snowdream.android.app.*;
-
 import com.github.snowdream.android.apps.explorer.broadcastreceiver.SystemBroadCastReceiver;
 import com.github.snowdream.android.apps.explorer.interfaces.ISDCardListener;
 import com.google.analytics.tracking.android.EasyTracker;
@@ -61,7 +61,7 @@ import java.util.List;
  * @see
  * @since Ver 1.1
  */
-public class MainActivity extends Activity implements OnItemClickListener, ISDCardListener {
+public class MainActivity extends ActionBarActivity implements OnItemClickListener, ISDCardListener {
 
     private static final String TAG = "HDExplorer";
     //Boolean Flags
@@ -144,6 +144,9 @@ public class MainActivity extends Activity implements OnItemClickListener, ISDCa
         initUI();
         initData();
         SystemBroadCastReceiver.addListener(this);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 
 

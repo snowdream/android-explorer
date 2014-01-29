@@ -53,6 +53,7 @@ public class MainApplication extends Application {
                 .build();
 
         ImageLoader.getInstance().init(config);
+
     }
 
 

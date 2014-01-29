@@ -32,6 +32,7 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.view.WindowManager;
 import com.google.analytics.tracking.android.EasyTracker;
@@ -85,6 +86,7 @@ public class HDPreferenceActivity extends PreferenceActivity implements
 
         Boolean isshowhidden = settings.getBoolean(key_showhidden, default_value_showhidden);
         check_showhidden.setChecked(isshowhidden);
+
     }
 
     /**
