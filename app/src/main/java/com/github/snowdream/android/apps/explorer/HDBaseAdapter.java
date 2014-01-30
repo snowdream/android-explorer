@@ -143,7 +143,7 @@ public class HDBaseAdapter extends BaseAdapter {
                                     .cacheInMemory(true)
                                     .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
                                     .bitmapConfig(Bitmap.Config.ARGB_8888)
-                                    .displayer(new FadeInBitmapDisplayer(300))
+                                    .displayer(new FadeInBitmapDisplayer(100))
                                     .build();
 
                             String imageUri = new StringBuffer()
