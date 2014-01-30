@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <updateInfo>
-    <appName>android-explorer</appName>
-    <appDescription>android-explorer</appDescription>
-    <packageName>com.hd.explorer</packageName>
-    <versionCode>8</versionCode>
-    <versionName>0.1.16</versionName>
+    <appName>Snowdream File Explorer</appName>
+    <appDescription>Snowdream File Explorer</appDescription>
+    <packageName>com.github.snowdream.android.apps.explorer</packageName>
+    <versionCode>10</versionCode>
+    <versionName>0.1.20</versionName>
     <forceUpdate>false</forceUpdate>
     <autoUpdate>false</autoUpdate>
-    <apkUrl>https://github.com/snowdream/android-explorer/releases/download/v0.1.16/explorer-v0.1.16-release.apk</apkUrl>
+    <apkUrl>https://github.com/snowdream/android-explorer/releases/download/android-explorer-0.1.20/explorer-v0.1.20-release.apk</apkUrl>
     <updateTips>
-        <default>update tips</default>
-        <en>update tips</en>
-        <zh>升级提示\n1.版本检查\n2.版本维护\n3.版本更新</zh>
-        <zh_CN>升级提示</zh_CN>
-        <zh_TW>升级提示</zh_TW>
-        <zh_HK>升级提示</zh_HK>
+        <default>HDExplorer has be renamed to Snowdream File Explorer,Please upgrade now.</default>
+        <en>HDExplorer has be renamed to Snowdream File Explorer,Please upgrade now.</en>
+        <zh>HD文件管理器 已经改成 雪梦文件管理器，请及时升级。</zh>
+        <zh_CN>HD文件管理器 已经改成 雪梦文件管理器，请及时升级。</zh_CN>
+        <zh_TW>HD文件管理器 已经改成 雪梦文件管理器，请及时升级。</zh_TW>
+        <zh_HK>HD文件管理器 已经改成 雪梦文件管理器，请及时升级。</zh_HK>
     </updateTips>
 </updateInfo>
