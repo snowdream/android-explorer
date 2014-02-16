@@ -24,11 +24,11 @@ Google Play : [![Get it on Google Play](https://developer.android.com/images/bra
 Github : [https://github.com/snowdream/android-explorer/releases/download/android-explorer-0.1.20/explorer-v0.1.20-release.apk][2]
 
 ##Preview
-![1.png](https://raw.github.com/snowdream/android-imageviewer/master/docs/preview/1.png "1.png")
-![2.png](https://raw.github.com/snowdream/android-imageviewer/master/docs/preview/2.png "2.png")
-![3.png](https://raw.github.com/snowdream/android-imageviewer/master/docs/preview/3.png "3.png")
-![4.png](https://raw.github.com/snowdream/android-imageviewer/master/docs/preview/4.png "4.png")
-![5.png](https://raw.github.com/snowdream/android-imageviewer/master/docs/preview/5.png "5.png")
+![1.png](https://raw.github.com/snowdream/android-explorer/master/docs/preview/1.png "1.png")
+![2.png](https://raw.github.com/snowdream/android-explorer/master/docs/preview/2.png "2.png")
+![3.png](https://raw.github.com/snowdream/android-explorer/master/docs/preview/3.png "3.png")
+![4.png](https://raw.github.com/snowdream/android-explorer/master/docs/preview/4.png "4.png")
+![5.png](https://raw.github.com/snowdream/android-explorer/master/docs/preview/5.png "5.png")
        
 
 ##License
