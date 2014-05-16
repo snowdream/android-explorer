@@ -1,4 +1,4 @@
-package com.github.snowdream.android.app;
+package com.github.snowdream.android.app.updater;
 
 import android.text.TextUtils;
 
@@ -22,7 +22,7 @@ public class UpdateXmlParser extends AbstractParser {
      *
      * @param content
      * @return UpdateInfo
-     * @throws com.github.snowdream.android.app.UpdateException
+     * @throws UpdateException
      */
     @Override
     public UpdateInfo parse(String content) throws UpdateException {

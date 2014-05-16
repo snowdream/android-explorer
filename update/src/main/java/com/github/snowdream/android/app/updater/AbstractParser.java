@@ -1,4 +1,4 @@
-package com.github.snowdream.android.app;
+package com.github.snowdream.android.app.updater;
 
 /**
  * Created by snowdream on 1/3/14.

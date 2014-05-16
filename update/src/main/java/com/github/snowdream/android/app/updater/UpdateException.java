@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.github.snowdream.android.app;
+package com.github.snowdream.android.app.updater;
 
 
 public class UpdateException extends Exception {

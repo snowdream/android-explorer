@@ -1,4 +1,4 @@
-package com.github.snowdream.android.app;
+package com.github.snowdream.android.app.updater;
 
 /**
  * The Period wich is used to check for update.<br/>

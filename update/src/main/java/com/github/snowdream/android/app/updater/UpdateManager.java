@@ -1,4 +1,4 @@
-package com.github.snowdream.android.app;
+package com.github.snowdream.android.app.updater;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.text.TextUtils;
 import android.webkit.URLUtil;
 
 import com.github.kevinsawicki.http.HttpRequest;
+import com.github.snowdream.android.app.DownloadListener;
+import com.github.snowdream.android.app.DownloadManager;
+import com.github.snowdream.android.app.DownloadTask;
 import com.github.snowdream.android.util.Log;
 import com.github.snowdream.android.util.concurrent.AsyncTask;
 import com.google.gson.JsonSyntaxException;

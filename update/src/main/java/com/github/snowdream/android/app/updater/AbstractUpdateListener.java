@@ -1,11 +1,9 @@
-package com.github.snowdream.android.app;
+package com.github.snowdream.android.app.updater;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Handler;
 
-import com.github.snowdream.android.util.Log;
+import com.github.snowdream.android.app.DownloadTask;
 import com.github.snowdream.android.util.concurrent.TaskListener;
 
 import java.util.Locale;

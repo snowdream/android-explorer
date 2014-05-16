@@ -1,4 +1,4 @@
-package com.github.snowdream.android.app;
+package com.github.snowdream.android.app.updater;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -143,7 +143,7 @@ public final class UpdateOptions {
         }
 
         /**
-         * Set the period {@link com.github.snowdream.android.app.UpdatePeriod}
+         * Set the period {@link UpdatePeriod}
          *
          * @param updatePeriod
          * @return Builder
@@ -210,7 +210,7 @@ public final class UpdateOptions {
         }
 
         /**
-         * Set the format  {@link com.github.snowdream.android.app.UpdateFormat}
+         * Set the format  {@link UpdateFormat}
          *
          * @param updateFormat
          * @return

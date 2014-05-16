@@ -1,4 +1,4 @@
-package com.github.snowdream.android.app;
+package com.github.snowdream.android.app.updater;
 
 import android.app.AlertDialog;
 import android.app.NotificationManager;
@@ -6,15 +6,11 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
-import android.widget.Toast;
 
+import com.github.snowdream.android.app.DownloadTask;
 import com.github.snowdream.android.util.Log;
 
 /**
