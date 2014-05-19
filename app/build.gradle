@@ -21,7 +21,9 @@ apply from: '../config/android.gradle'
 //apply from: '../config/maven_push.gradle'
 
 dependencies {
-    compile project(':update')
+    compile ('com.github.snowdream.android.app:updater:1.0@aar'){
+        transitive=true
+    }
     compile "com.android.support:support-v4:19.0.1+"
     compile 'com.android.support:appcompat-v7:19.0.1+'
     compile 'com.google.android.analytics:analytics:3.0.0'

@@ -39,7 +39,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.*;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
-import com.github.snowdream.android.app.updater.*;
+import com.github.snowdream.android.app.*;
 import com.github.snowdream.android.apps.explorer.broadcastreceiver.SystemBroadCastReceiver;
 import com.github.snowdream.android.apps.explorer.interfaces.ISDCardListener;
 import com.google.analytics.tracking.android.EasyTracker;
