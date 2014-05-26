@@ -39,7 +39,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.*;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
-import com.github.snowdream.android.app.*;
+import com.github.snowdream.android.app.updater.*;
 import com.github.snowdream.android.apps.explorer.broadcastreceiver.SystemBroadCastReceiver;
 import com.github.snowdream.android.apps.explorer.interfaces.ISDCardListener;
 import com.google.analytics.tracking.android.EasyTracker;
@@ -196,17 +196,14 @@ public class MainActivity extends ActionBarActivity implements OnItemClickListen
         manager.check(this, options, new DefaultUpdateListener() {
             @Override
             public void onStart() {
-                //super.onStart();
             }
 
             @Override
             public void onShowNoUpdateUI() {
-                //super.onShowNoUpdateUI();
             }
 
             @Override
             public void onFinish() {
-                //super.onFinish();
             }
         });
     }

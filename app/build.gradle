@@ -21,7 +21,7 @@ apply from: '../config/android.gradle'
 //apply from: '../config/maven_push.gradle'
 
 dependencies {
-    compile ('com.github.snowdream.android.app:updater:1.0@aar'){
+    compile ('com.github.snowdream.android.app:updater:1.1@aar'){
         transitive=true
     }
     compile "com.android.support:support-v4:19.0.1+"
