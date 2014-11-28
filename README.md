@@ -1,4 +1,6 @@
 #Snowdream File Explorer
+[![Build Status](https://travis-ci.org/SnowdreamFramework/android-explorer.svg?branch=master)](https://travis-ci.org/SnowdreamFramework/android-explorer)
+
 
 ##Introduction
 Full featured file manager, Nice UI design and user friendly functions!
