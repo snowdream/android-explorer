@@ -1,5 +1,5 @@
 #Snowdream File Explorer
-[![Build Status](https://travis-ci.org/SnowdreamFramework/android-explorer.svg?branch=master)](https://travis-ci.org/SnowdreamFramework/android-explorer)
+[![Build Status](https://travis-ci.org/snowdream/android-explorer.svg?branch=master)](https://travis-ci.org/snowdream/android-explorer)
 
 
 ##Introduction
