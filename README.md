@@ -50,5 +50,5 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ```
 
-[1]:https://play.google.com/store/apps/details?id=com.github.snowdream.android.apps.explorer
+[1]:https://play.google.com/store/apps/details?id=com.github.snowdream.android.apps.explorers
 [2]:https://github.com/snowdream/android-explorer/releases/download/android-explorer-0.1.20/explorer-v0.1.20-release.apk
